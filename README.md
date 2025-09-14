@@ -47,7 +47,7 @@ nvim/
 1. Clone this repository into your Neovim config path:
 
 ```bash
-git clone https://github.com/Geudys/Neovim.git ~/.config/nvim
+git clone https://github.com/Geudys/nvim.git
 ```
 
 2. Open Neovim and let it install plugins automatically:
