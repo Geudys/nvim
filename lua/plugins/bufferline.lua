@@ -7,7 +7,7 @@ return {
 			require("bufferline").setup({
 				options = {
 					mode = "buffers",
-					numbers = "ordinal", -- muestra número de buffer para fácil navegación
+					numbers = "ordinal",
 					close_command = "bdelete! %d",
 					right_mouse_command = "bdelete! %d",
 					left_mouse_command = "buffer %d",
@@ -27,10 +27,23 @@ return {
 					show_buffer_close_icons = true,
 					show_tab_indicators = true,
 					persist_buffer_sort = true,
-					separator_style = "thin", -- estilo más llamativo
+					separator_style = "thin",
 					enforce_regular_tabs = true,
 					always_show_bufferline = true,
 					sort_by = "id",
+				},
+				highlights = {
+					fill = { bg = "none" },
+					background = { bg = "none" },
+					buffer_selected = { bg = "none" },
+					buffer_visible = { bg = "none" },
+					close_button = { bg = "none" },
+					close_button_visible = { bg = "none" },
+					close_button_selected = { bg = "none" },
+					separator = { bg = "none" },
+					separator_selected = { bg = "none" },
+					separator_visible = { bg = "none" },
+					indicator_selected = { bg = "none" },
 				},
 			})
 		end,
