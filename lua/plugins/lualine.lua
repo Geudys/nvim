@@ -6,7 +6,7 @@ return {
 		require("lualine").setup({
 			options = {
 				globalstatus = true,
-				theme = "night-owl",
+				theme = "nord",
 				component_separators = "",
 				section_separators = { left = "", right = "" },
 			},

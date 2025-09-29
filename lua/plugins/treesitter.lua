@@ -1,9 +1,10 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate", -- para asegurar instalación
 		lazy = false,
 		config = function()
-			require("nvim-treesitter").setup({
+			require("nvim-treesitter.configs").setup({
 				highlight = { enable = true },
 				indent = { enable = true },
 				ensure_installed = {
@@ -43,12 +44,14 @@ return {
 				context_commentstring = { enable = true, enable_autocmd = false },
 			})
 
+			-- Registrar zsh con el parser de bash
 			vim.treesitter.language.register("bash", "zsh")
 
-			-- Playground
+			-- Playground toggle
 			vim.keymap.set("n", "<leader>tp", ":TSPlaygroundToggle<CR>", { desc = "Toggle TS Playground" })
 		end,
 	},
+
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },

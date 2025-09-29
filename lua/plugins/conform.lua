@@ -1,8 +1,8 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" }, -- se carga cuando guardas archivos
-		cmd = { "ConformInfo" }, -- puedes abrir info con :ConformInfo
+		event = { "BufWritePre" }, -- se carga justo antes de guardar
+		cmd = { "ConformInfo" }, -- puedes ver info con :ConformInfo
 		keys = {
 			{
 				"<leader>mp",
@@ -44,7 +44,6 @@ return {
 					javascriptreact = { "prettier" },
 					typescriptreact = { "prettier" },
 					vue = { "prettier" },
-					svelte = { "prettier" },
 					markdown = { "prettier" },
 					json = { "prettier" },
 					jsonc = { "prettier" },
@@ -64,28 +63,9 @@ return {
 							"--arrow-parens=avoid",
 						},
 					},
-					prettierd = {
-						prepend_args = {
-							"--tab-width=4",
-							"--use-tabs=false",
-							"--single-quote=true",
-							"--trailing-comma=es5",
-							"--semi=true",
-							"--bracket-spacing=true",
-							"--arrow-parens=avoid",
-						},
-					},
 				},
 				default_format_opts = { lsp_fallback = true },
 				format_on_save = { timeout_ms = 3000, lsp_fallback = true },
-			})
-
-			-- Autocmd para formateo automático al guardar
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				pattern = "*",
-				callback = function(args)
-					require("conform").format({ bufnr = args.buf, lsp_fallback = true, timeout_ms = 3000 })
-				end,
 			})
 		end,
 	},
