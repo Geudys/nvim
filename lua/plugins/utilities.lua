@@ -118,13 +118,6 @@ return {
 		end,
 	},
 
-	-- render-markdown
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		lazy = true,
-		cmd = { "RenderMarkdown" },
-	},
-
 	-- todo-comments
 	{
 		"folke/todo-comments.nvim",

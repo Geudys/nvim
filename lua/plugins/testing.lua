@@ -54,4 +54,20 @@ return {
 			end, { desc = "Debug test with DAP" })
 		end,
 	},
+	-- SnipRun: ejecutar fragmentos de código
+	{
+		"michaelb/sniprun",
+		build = "bash ./install.sh",
+		config = function()
+			require("sniprun").setup({
+				selected_interpreters = { "JS_TS_original" },
+				display = { "VirtualTextOk", "Terminal" }, -- puedes agregar "FloatingWindow"
+			})
+
+			-- Keymaps SnipRun
+			vim.keymap.set("n", "<leader>rr", ":SnipRun<CR>", { desc = "Run current line" })
+			vim.keymap.set("v", "<leader>rr", ":'<,'>SnipRun<CR>", { desc = "Run selection" })
+			vim.keymap.set("n", "<leader>rc", ":SnipClose<CR>", { desc = "Close SnipRun output" })
+		end,
+	},
 }

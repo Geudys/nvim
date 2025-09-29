@@ -2,18 +2,16 @@ return {
 	-- Debug Adapter Protocol (DAP)
 	{
 		"mfussenegger/nvim-dap",
-		-- lazy = false,
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
 			"jay-babu/mason-nvim-dap.nvim",
-			"nvim-neotest/nvim-nio", -- 🔥 dependencia requerida por nvim-dap-ui
+			"nvim-neotest/nvim-nio",
 		},
 		config = function()
 			local dap = require("dap")
 			local dapui = require("dapui")
 
-			-- UI
 			dapui.setup()
 
 			-- Integrar dap-ui con eventos
@@ -27,13 +25,7 @@ return {
 				dapui.close()
 			end
 
-			-- Mason DAP para instalar adaptadores
-			require("mason-nvim-dap").setup({
-				automatic_installation = true,
-				handlers = {},
-			})
-
-			-- Keymaps básicos de depuración
+			-- Keymaps de depuración
 			vim.keymap.set("n", "<F5>", dap.continue, { desc = "DAP: Start/Continue" })
 			vim.keymap.set("n", "<F10>", dap.step_over, { desc = "DAP: Step Over" })
 			vim.keymap.set("n", "<F11>", dap.step_into, { desc = "DAP: Step Into" })
@@ -47,6 +39,27 @@ return {
 			vim.keymap.set("n", "<Leader>cdr", dap.repl.open, { desc = "DAP: Open REPL" })
 			vim.keymap.set("n", "<Leader>cdl", dap.run_last, { desc = "DAP: Run Last" })
 			vim.keymap.set("n", "<Leader>cdu", dapui.toggle, { desc = "DAP: Toggle UI" })
+
+			-- Ejemplo de configuración para Node.js (JavaScript / TypeScript)
+			dap.adapters.node2 = {
+				type = "executable",
+				command = "node",
+				args = { vim.fn.stdpath("data") .. "/mason/packages/node-debug2-adapter/out/src/nodeDebug.js" },
+			}
+
+			dap.configurations.javascript = {
+				{
+					name = "Launch file",
+					type = "node2",
+					request = "launch",
+					program = "${file}",
+					cwd = vim.fn.getcwd(),
+					sourceMaps = true,
+					protocol = "inspector",
+				},
+			}
+
+			dap.configurations.typescript = dap.configurations.javascript
 		end,
 	},
 }
