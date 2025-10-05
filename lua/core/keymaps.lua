@@ -1,4 +1,3 @@
--- he
 -- ========================================
 -- Tecla líder
 -- ========================================
@@ -43,7 +42,6 @@ vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Eliminar buffer"
 vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Cerrar otros buffers" })
 vim.keymap.set("n", "<leader>ba", ":%bd<CR>", { desc = "Cerrar todos los buffers" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Nuevo buffer" })
-vim.keymap.set("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Elegir buffer" })
 
 -- ========================================
 -- Búsqueda y reemplazo

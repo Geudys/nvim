@@ -40,16 +40,6 @@ return {
 		end,
 	},
 
-	-- Diffview
-	{
-		"sindrets/diffview.nvim",
-		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-		keys = {
-			{ "<leader>gvo", "<cmd>DiffviewOpen<CR>", desc = "Abrir vista de diff" },
-			{ "<leader>gvh", "<cmd>DiffviewFileHistory<CR>", desc = "Historial del archivo actual" },
-		},
-	},
-
 	-- Git blame
 	{
 		"f-person/git-blame.nvim",

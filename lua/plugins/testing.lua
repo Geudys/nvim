@@ -11,6 +11,7 @@ return {
 			"nvim-neotest/neotest-jest",
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-go",
+			"nvim-neotest/nvim-nio",
 		},
 		config = function()
 			local neotest = require("neotest")
@@ -21,9 +22,6 @@ return {
 						jestCommand = "npm test --",
 						jestConfigFile = "jest.config.js",
 						env = { CI = true },
-						cwd = function(path)
-							return vim.fn.getcwd()
-						end,
 					}),
 					require("neotest-python")({
 						dap = { justMyCode = false },

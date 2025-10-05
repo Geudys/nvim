@@ -53,8 +53,6 @@ return {
 					border = "single",
 					width = 152,
 					height = 7,
-					-- row = math.floor(vim.o.lines - 23),
-					-- col = math.floor(vim.o.columns - 53),
 				},
 			})
 		end,
@@ -154,23 +152,6 @@ return {
 					change = "<leader>nc",
 					visual = "<leader>nt",
 				},
-			})
-		end,
-	},
-
-	-- toggleterm
-	{
-		"akinsho/toggleterm.nvim",
-		lazy = true,
-		cmd = { "ToggleTerm" },
-		config = function()
-			require("toggleterm").setup({
-				size = 15,
-				open_mapping = [[<C-t>]],
-				shade_terminals = true,
-				start_in_insert = true,
-				direction = "float",
-				float_opts = { border = "curved", winblend = 3 },
 			})
 		end,
 	},
