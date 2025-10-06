@@ -9,7 +9,6 @@ Built with **Lua**, including **LSP** support, autocompletion, snippets, and mor
 ```
 nvim/
 ├── init.lua
-├── colors/
 ├── lua/
 │ ├── core/ -> Neovim options and keymaps
 │ └── plugins/ -> Plugins configurations
@@ -23,7 +22,6 @@ nvim/
 - 🧩 Plugin management with **lazy.nvim**.  
 - 💡 **LSP** support with `nvim-lspconfig` and `mason`.  
 - 🔮 Autocompletion using `nvim-cmp` + snippets (`LuaSnip`).  
-- 🐞 Debugging support with **DAP** integrations.  
 - 🌲 **Treesitter** for modern syntax highlighting.  
 - 📊 UI improvements with `noice`, `lualine`, `bufferline`, and more.  
 - 🔍 Powerful search and navigation with `telescope` and `spectre`.  
