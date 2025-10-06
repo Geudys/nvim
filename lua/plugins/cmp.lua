@@ -35,8 +35,19 @@ return {
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
+					["<C-e>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.abort()
+						else
+							-- Forzar actualización o limpiar ghost text del LSP
+							vim.schedule(function()
+								vim.cmd("stopinsert")
+								vim.cmd("startinsert")
+							end)
+						end
+					end, { "i", "s" }),
+
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
@@ -63,6 +74,11 @@ return {
 						maxwidth = 50,
 						ellipsis_char = "...",
 					}),
+				},
+			})
+			cmp.setup({
+				experimental = {
+					ghost_text = true,
 				},
 			})
 
