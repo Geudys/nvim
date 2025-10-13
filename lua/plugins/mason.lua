@@ -28,7 +28,6 @@ return {
 					"ts_ls",
 					"html",
 					"cssls",
-					"intelephense",
 					"jdtls",
 					"jsonls",
 					"yamlls",
