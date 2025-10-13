@@ -51,8 +51,14 @@ return {
 				preset = "classic",
 				win = {
 					border = "single",
-					width = 152,
-					height = 7,
+					width = 40, -- más estrecho
+					height = 25, -- más alto
+					row = vim.o.lines - 18, -- posición hacia abajo
+					col = vim.o.columns - 42, -- posición hacia la derecha
+				},
+				layout = {
+					align = "right", -- alinear el texto a la derecha
+					spacing = 3, -- espacio entre columnas
 				},
 			})
 		end,
