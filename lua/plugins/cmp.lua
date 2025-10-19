@@ -17,7 +17,6 @@ return {
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
 
-			-- Cargar snippets de vscode
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
@@ -36,18 +35,7 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
-					["<C-e>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.abort()
-						else
-							-- Forzar actualización o limpiar ghost text del LSP
-							vim.schedule(function()
-								vim.cmd("stopinsert")
-								vim.cmd("startinsert")
-							end)
-						end
-					end, { "i", "s" }),
-
+					["<C-e>"] = cmp.mapping.abort(),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
@@ -78,11 +66,10 @@ return {
 			})
 			cmp.setup({
 				experimental = {
-					ghost_text = true,
+					ghost_text = false,
 				},
 			})
 
-			-- Configuración para cmdline
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
