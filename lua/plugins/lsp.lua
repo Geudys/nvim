@@ -1,6 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
-	lazy = false,
+	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
@@ -86,18 +86,7 @@ return {
 			severity_sort = true,
 		})
 
-		-- === Configuración de servidores con el nuevo API ===
-		vim.lsp.config("graphql", {
-			capabilities = capabilities,
-			filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
-		})
-
 		vim.lsp.config("emmet_ls", {
-			capabilities = capabilities,
-			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
-		})
-
-		vim.lsp.config("eslint", {
 			capabilities = capabilities,
 			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
 		})
