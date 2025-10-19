@@ -17,7 +17,6 @@ return {
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
 
-			-- Cargar snippets de vscode
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
@@ -71,7 +70,6 @@ return {
 				},
 			})
 
-			-- Configuración para cmdline
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
