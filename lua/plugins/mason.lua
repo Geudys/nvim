@@ -1,7 +1,7 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		build = ":MasonUpdate",
+		lazy = false,
 		config = function()
 			require("mason").setup({
 				ui = {
@@ -30,10 +30,6 @@ return {
 					"cssls",
 					"jdtls",
 					"jsonls",
-					"yamlls",
-					"bashls",
-					"dockerls",
-					"sqlls",
 					"vimls",
 				},
 			})
