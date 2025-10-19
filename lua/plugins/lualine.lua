@@ -62,7 +62,6 @@ return {
 					},
 				},
 			},
-			extensions = { "toggleterm", "trouble" },
 		})
 	end,
 }

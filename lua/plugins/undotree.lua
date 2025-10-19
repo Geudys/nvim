@@ -1,7 +1,7 @@
 return {
 	{
 		"mbbill/undotree",
-		lazy = true,
+		lazy = false,
 		config = function()
 			-- Configuración de Undotree
 			vim.g.undotree_WindowLayout = 3

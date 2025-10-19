@@ -8,6 +8,7 @@ return {
 			telescope.setup({})
 
 			-- Keymaps
+			vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope find_files<CR>")
 			vim.keymap.set("n", "<leader>tf", "<cmd>Telescope find_files<CR>")
 			vim.keymap.set("n", "<leader>ti", "<cmd>Telescope live_grep<CR>")
 			vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<CR>")
