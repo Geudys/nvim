@@ -45,7 +45,7 @@ return {
 		"f-person/git-blame.nvim",
 		cmd = { "GitBlameToggle" },
 		keys = {
-			{ "<leader>gbl", "<cmd>GitBlameToggle<CR>", desc = "Alternar Git Blame" },
+			{ "<leader>gt", "<cmd>GitBlameToggle<CR>", desc = "Alternar Git Blame" },
 		},
 		init = function()
 			vim.g.gitblame_enabled = 0

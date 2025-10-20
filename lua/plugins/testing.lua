@@ -63,9 +63,9 @@ return {
 			})
 
 			-- Keymaps SnipRun
-			vim.keymap.set("n", "<leader>rr", ":SnipRun<CR>", { desc = "Run current line" })
-			vim.keymap.set("v", "<leader>rr", ":'<,'>SnipRun<CR>", { desc = "Run selection" })
-			vim.keymap.set("n", "<leader>rc", ":SnipClose<CR>", { desc = "Close SnipRun output" })
+			vim.keymap.set("n", "<leader>cr", ":SnipRun<CR>", { desc = "Run current line" })
+			vim.keymap.set("v", "<leader>cr", ":'<,'>SnipRun<CR>", { desc = "Run selection" })
+			vim.keymap.set("n", "<leader>cc", ":SnipClose<CR>", { desc = "Close SnipRun output" })
 		end,
 	},
 }
