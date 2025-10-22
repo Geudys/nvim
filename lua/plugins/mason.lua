@@ -31,6 +31,7 @@ return {
 					"jdtls",
 					"jsonls",
 					"vimls",
+					"marksman",
 				},
 			})
 		end,

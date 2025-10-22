@@ -11,7 +11,6 @@ return {
 		local keymap = vim.keymap
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- Keymaps en attach
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
@@ -58,7 +57,6 @@ return {
 			end,
 		})
 
-		-- Config de diagnósticos
 		vim.diagnostic.config({
 			virtual_text = {
 				enabled = true,
@@ -97,6 +95,20 @@ return {
 				Lua = {
 					diagnostics = { globals = { "vim" } },
 					completion = { callSnippet = "Replace" },
+				},
+			},
+		})
+
+		vim.lsp.config("marksman", {
+			capabilities = capabilities,
+			filetypes = { "markdown", "markdown.mdx" },
+			settings = {
+				markdown = {
+					completion = {
+						enable = true,
+						show_links = true,
+						show_headers = true,
+					},
 				},
 			},
 		})
