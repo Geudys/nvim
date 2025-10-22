@@ -1,5 +1,4 @@
 return {
-	-- flash.nvim
 	{
 		"folke/flash.nvim",
 		lazy = true,
@@ -14,7 +13,6 @@ return {
 		end,
 	},
 
-	-- Comment.nvim
 	{
 		"numToStr/Comment.nvim",
 		lazy = true,
@@ -24,7 +22,6 @@ return {
 		end,
 	},
 
-	-- autopairs + cmp
 	{
 		"windwp/nvim-autopairs",
 		lazy = true,
@@ -39,7 +36,6 @@ return {
 		end,
 	},
 
-	-- which-key
 	{
 		"folke/which-key.nvim",
 		lazy = true,
@@ -51,20 +47,19 @@ return {
 				preset = "classic",
 				win = {
 					border = "single",
-					width = 40, -- más estrecho
-					height = 25, -- más alto
-					row = vim.o.lines - 18, -- posición hacia abajo
-					col = vim.o.columns - 42, -- posición hacia la derecha
+					width = 40,
+					height = 25,
+					row = vim.o.lines - 18,
+					col = vim.o.columns - 42,
 				},
 				layout = {
-					align = "right", -- alinear el texto a la derecha
-					spacing = 3, -- espacio entre columnas
+					align = "right",
+					spacing = 3,
 				},
 			})
 		end,
 	},
 
-	-- colorizer
 	{
 		"norcalli/nvim-colorizer.lua",
 		lazy = false,
@@ -74,7 +69,6 @@ return {
 		end,
 	},
 
-	-- transparent
 	{
 		"xiyaowong/nvim-transparent",
 		lazy = false,
@@ -110,7 +104,6 @@ return {
 		end,
 	},
 
-	-- notify
 	{
 		"rcarriga/nvim-notify",
 		lazy = true,
@@ -122,7 +115,6 @@ return {
 		end,
 	},
 
-	-- todo-comments
 	{
 		"folke/todo-comments.nvim",
 		lazy = false,
@@ -143,7 +135,6 @@ return {
 		end,
 	},
 
-	-- nvim-surround
 	{
 		"kylechui/nvim-surround",
 		lazy = true,

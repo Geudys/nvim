@@ -1,5 +1,4 @@
 return {
-	-- Gitsigns
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -21,7 +20,6 @@ return {
 		end,
 	},
 
-	-- Neogit
 	{
 		"TimUntersberger/neogit",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -40,7 +38,6 @@ return {
 		end,
 	},
 
-	-- Git blame
 	{
 		"f-person/git-blame.nvim",
 		cmd = { "GitBlameToggle" },
@@ -52,7 +49,6 @@ return {
 		end,
 	},
 
-	-- Lazygit
 	{
 		"kdheepak/lazygit.nvim",
 		cmd = "LazyGit",

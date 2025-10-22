@@ -1,13 +1,11 @@
 return {
 	{
 		"nvim-neotest/neotest",
-		-- lazy = true,
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
-			-- Adaptadores por lenguaje
 			"nvim-neotest/neotest-jest",
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-go",
@@ -30,7 +28,6 @@ return {
 				},
 			})
 
-			-- Keymaps de testing
 			vim.keymap.set("n", "<Leader>ctt", function()
 				neotest.run.run()
 			end, { desc = "Run nearest test" })
@@ -52,17 +49,15 @@ return {
 			end, { desc = "Debug test with DAP" })
 		end,
 	},
-	-- SnipRun: ejecutar fragmentos de código
 	{
 		"michaelb/sniprun",
 		build = "bash ./install.sh",
 		config = function()
 			require("sniprun").setup({
 				selected_interpreters = { "JS_TS_original" },
-				display = { "VirtualTextOk", "Terminal" }, -- puedes agregar "FloatingWindow"
+				display = { "VirtualTextOk", "Terminal" },
 			})
 
-			-- Keymaps SnipRun
 			vim.keymap.set("n", "<leader>cr", ":SnipRun<CR>", { desc = "Run current line" })
 			vim.keymap.set("v", "<leader>cr", ":'<,'>SnipRun<CR>", { desc = "Run selection" })
 			vim.keymap.set("n", "<leader>cc", ":SnipClose<CR>", { desc = "Close SnipRun output" })

@@ -1,8 +1,8 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" }, -- se carga justo antes de guardar
-		cmd = { "ConformInfo" }, -- puedes ver info con :ConformInfo
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
 		keys = {
 			{
 				"<leader>mp",

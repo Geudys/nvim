@@ -14,7 +14,6 @@ return {
 				},
 			})
 
-			-- Keymaps
 			vim.keymap.set("n", "<leader>fs", function()
 				spectre.toggle()
 			end, { desc = "Abrir/Cerrar Spectre (Buscar/Reemplazar)" })

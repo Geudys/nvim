@@ -6,7 +6,6 @@ return {
 			local alpha = require("alpha")
 			local dashboard = require("alpha.themes.dashboard")
 
-			-- Cabecera personalizada
 			dashboard.section.header.val = {
 				[[                                                                      ]],
 				[[       ████ ██████           █████      ██                     ]],
@@ -18,7 +17,6 @@ return {
 				[[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
 			}
 
-			-- Botones del dashboard
 			dashboard.section.buttons.val = {
 				dashboard.button("e", "  Neotre", ":Neotree<CR>"),
 				dashboard.button("f", "  Search files", ":Telescope find_files<CR>"),
@@ -29,7 +27,6 @@ return {
 				dashboard.button("q", "  Exit", ":qa<CR>"),
 			}
 
-			-- Footer personalizado
 			dashboard.section.footer.val = function()
 				return "󰈹 Firefox ~ 󱓧 Obsidian ~  Wezterm"
 			end

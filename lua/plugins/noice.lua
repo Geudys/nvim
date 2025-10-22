@@ -1,4 +1,3 @@
--- Lazy.nvim setup para noice.nvim
 return {
 	{
 		"folke/noice.nvim",
