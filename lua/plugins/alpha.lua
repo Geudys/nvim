@@ -27,10 +27,6 @@ return {
 				dashboard.button("q", "  Exit", ":qa<CR>"),
 			}
 
-			dashboard.section.footer.val = function()
-				return "󰈹 Firefox ~ 󱓧 Obsidian ~  Wezterm"
-			end
-
 			dashboard.opts.opts.noautocmd = true
 			alpha.setup(dashboard.config)
 		end,
