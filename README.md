@@ -6,6 +6,7 @@ Built with **Lua**, including **LSP** support, autocompletion, snippets, and mor
 ---
 
 ## 📂 Repository Structure
+
 ```
 nvim/
 ├── init.lua
@@ -18,15 +19,16 @@ nvim/
 
 ## ✨ Features
 
-- ⚡ Fully configured in **Lua** for speed and flexibility.  
-- 🧩 Plugin management with **lazy.nvim**.  
-- 💡 **LSP** support with `nvim-lspconfig` and `mason`.  
-- 🔮 Autocompletion using `nvim-cmp` + snippets (`LuaSnip`).  
-- 🌲 **Treesitter** for modern syntax highlighting.  
-- 📊 UI improvements with `noice`, `lualine`, `bufferline`, and more.  
-- 🔍 Powerful search and navigation with `telescope` and `spectre`.  
-- 🌐 Git integration with `gitsigns` and related tools.  
-- 🎨 Default theme: **Night Owl**.  
+- ⚡ Fully configured in **Lua** for speed and flexibility.
+- 🧩 Plugin management with **lazy.nvim**.
+- 💡 **LSP** support with `nvim-lspconfig` and `mason`.
+- 🔮 Autocompletion using `nvim-cmp` + snippets (`LuaSnip`).
+- 🌲 **Treesitter** for modern syntax highlighting.
+- 📊 UI improvements with `noice`, `lualine`, `bufferline`, and more.
+- 🔍 Powerful search and navigation with `telescope` and `spectre`.
+- 🌐 Git integration with `gitsigns` and related tools.
+- 🧠 **Obsidian.nvim** integration for connected note-taking and Zettelkasten workflows.
+- 🎨 Default theme: **Night Owl**.
 
 ---
 
@@ -49,10 +51,10 @@ git clone https://github.com/Geudys/nvim.git
 ```
 
 2. Open Neovim and let it install plugins automatically:
+
 ```bash
 nvim
 ```
-
 
 ## 📝 Notes
 
