@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-neotest/neotest",
+		lazy = true,
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -51,6 +52,8 @@ return {
 	},
 	{
 		"michaelb/sniprun",
+		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
 		build = "bash ./install.sh",
 		config = function()
 			require("sniprun").setup({

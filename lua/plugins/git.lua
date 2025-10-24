@@ -2,6 +2,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		lazy = true,
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			local gs = require("gitsigns")
@@ -22,6 +23,8 @@ return {
 
 	{
 		"TimUntersberger/neogit",
+		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		cmd = "Neogit",
 		keys = {
@@ -40,6 +43,8 @@ return {
 
 	{
 		"f-person/git-blame.nvim",
+		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "GitBlameToggle" },
 		keys = {
 			{ "<leader>gt", "<cmd>GitBlameToggle<CR>", desc = "Alternar Git Blame" },
@@ -51,6 +56,7 @@ return {
 
 	{
 		"kdheepak/lazygit.nvim",
+		event = "VeryLazy",
 		cmd = "LazyGit",
 		keys = {
 			{ "<leader>gl", "<cmd>LazyGit<CR>", desc = "Abrir LazyGit" },

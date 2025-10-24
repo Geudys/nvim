@@ -1,7 +1,8 @@
 return {
 	{
 		"mbbill/undotree",
-		lazy = false,
+		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			vim.g.undotree_WindowLayout = 3
 

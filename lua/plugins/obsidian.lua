@@ -1,8 +1,9 @@
 return {
 	{
 		"epwalsh/obsidian.nvim",
+		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
-		lazy = false,
 		ft = "markdown",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {

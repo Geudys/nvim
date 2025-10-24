@@ -1,7 +1,8 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		lazy = false,
+		lazy = true,
+		event = "VeryLazy",
 		config = function()
 			require("mason").setup({
 				ui = {
@@ -16,6 +17,8 @@ return {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+		lazy = true,
+		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim" },
 		config = function()
 			require("mason-lspconfig").setup({
@@ -38,6 +41,8 @@ return {
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		lazy = true,
+		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim" },
 		config = function()
 			require("mason-tool-installer").setup({
