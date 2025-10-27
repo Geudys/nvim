@@ -4,7 +4,15 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("night-owl").setup()
+			local night_owl = require("night-owl")
+			night_owl.setup({
+				-- These are the default settings
+				bold = true,
+				italics = true,
+				underline = true,
+				undercurl = true,
+				transparent_background = true,
+			})
 		end,
 	},
 	{
