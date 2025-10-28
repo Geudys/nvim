@@ -1,6 +1,6 @@
 return {
 	{
-		"epwalsh/obsidian.nvim",
+		"obsidian-nvim/obsidian.nvim",
 		lazy = true,
 		event = "VeryLazy",
 		version = "*",
