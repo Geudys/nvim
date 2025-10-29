@@ -19,6 +19,12 @@ return {
 			picker = { name = "telescope.nvim" },
 			ui = { enable = true },
 			frontmatter = { enable = true },
+			footer = {
+				enabled = false, -- turn it off
+				separator = false, -- turn it off
+				format = "{{backlinks}} backlinks  {{properties}} properties  {{words}} words  {{chars}} chars", -- works like the template system
+				hl_group = "@property", -- Use another hl group
+			},
 			legacy_commands = false,
 			templates = {
 				subdir = "99 - Templates",
