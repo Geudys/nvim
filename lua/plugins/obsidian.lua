@@ -20,7 +20,6 @@ return {
 			ui = { enable = true },
 			frontmatter = { enable = true },
 			legacy_commands = false,
-
 			templates = {
 				subdir = "99 - Templates",
 				date_format = "%Y-%m-%d",
