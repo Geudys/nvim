@@ -14,31 +14,48 @@ return {
 	},
 
 	{
-		"numToStr/Comment.nvim",
+		"echasnovski/mini.comment",
+		version = false,
 		lazy = true,
 		keys = { { "gc", mode = "v" } },
 		config = function()
-			require("Comment").setup()
+			require("mini.comment").setup()
 		end,
 	},
 
 	{
-		"windwp/nvim-autopairs",
+		"echasnovski/mini.pairs",
+		version = false,
 		lazy = true,
 		event = "InsertEnter",
-		dependencies = { "hrsh7th/nvim-cmp" },
 		config = function()
-			local autopairs = require("nvim-autopairs")
-			autopairs.setup({ check_ts = true, enable_check_bracket_line = false })
+			require("mini.pairs").setup()
+		end,
+	},
 
-			local cmp = require("cmp")
-			cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+	{
+		"echasnovski/mini.surround",
+		version = false,
+		lazy = true,
+		event = "VeryLazy",
+		config = function()
+			require("mini.surround").setup({
+				mappings = {
+					add = "<leader>na",
+					delete = "<leader>nd",
+					find = "<leader>nf",
+					find_left = "<leader>nF",
+					highlight = "<leader>nh",
+					replace = "<leader>nr",
+					update_n_lines = "<leader>nn",
+				},
+			})
 		end,
 	},
 
 	{
 		"folke/which-key.nvim",
-		lazy = true,
+		lazy = false,
 		event = "VeryLazy",
 		config = function()
 			vim.o.ttimeout = true
@@ -52,10 +69,7 @@ return {
 					row = vim.o.lines - 18,
 					col = vim.o.columns - 42,
 				},
-				layout = {
-					align = "right",
-					spacing = 3,
-				},
+				layout = { align = "right", spacing = 3 },
 			})
 		end,
 	},
@@ -135,23 +149,6 @@ return {
 		end,
 	},
 
-	{
-		"kylechui/nvim-surround",
-		lazy = true,
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({
-				keymaps = {
-					normal = "<leader>ns",
-					normal_cur = "<leader>nl",
-					normal_line = "<leader>nS",
-					delete = "<leader>nd",
-					change = "<leader>nc",
-					visual = "<leader>nt",
-				},
-			})
-		end,
-	},
 	{
 		"kaarmu/typst.vim",
 		event = "VeryLazy",
