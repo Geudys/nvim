@@ -18,7 +18,8 @@ return {
 			finder = { max_results = 50 },
 			picker = { name = "telescope.nvim" },
 			ui = { enable = true },
-			disable_frontmatter = true,
+			frontmatter = { enable = true },
+			legacy_commands = false,
 
 			templates = {
 				subdir = "99 - Templates",
@@ -52,12 +53,12 @@ return {
 			local map = vim.keymap.set
 			local key_opts = { noremap = true, silent = true }
 
-			map("n", "<leader>on", ":ObsidianNew<CR>", key_opts)
-			map("n", "<leader>oo", ":ObsidianOpen<CR>", key_opts)
-			map("n", "<leader>os", ":ObsidianSearch<CR>", key_opts)
-			map("n", "<leader>ol", ":ObsidianLink<CR>", key_opts)
-			map("n", "<leader>ob", ":ObsidianBacklinks<CR>", key_opts)
-			map("n", "<leader>ot", ":ObsidianTemplate<CR>", key_opts)
+			map("n", "<leader>on", ":Obsidian new<CR>", key_opts)
+			map("n", "<leader>oo", ":Obsidian open<CR>", key_opts)
+			map("n", "<leader>os", ":Obsidian search<CR>", key_opts)
+			map("n", "<leader>ol", ":Obsidian link<CR>", key_opts)
+			map("n", "<leader>ob", ":Obsidian backlinks<CR>", key_opts)
+			map("n", "<leader>ot", ":Obsidian template<CR>", key_opts)
 
 			map("n", "<leader>od", function()
 				local daily_dir = "/mnt/c/My Desktop/GPS/Obsidian/06 - Daily/Daily 2025/Daily 2025-10/"
