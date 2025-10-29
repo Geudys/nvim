@@ -12,17 +12,19 @@ return {
 			end, { desc = "Flash search" })
 		end,
 	},
-
 	{
 		"echasnovski/mini.comment",
 		version = false,
 		lazy = true,
-		keys = { { "gc", mode = "v" } },
+		keys = { { "gc", mode = { "n", "v" } }, { "gcc", mode = "n" } },
 		config = function()
 			require("mini.comment").setup()
 		end,
 	},
-
+	{
+		"echasnovski/mini.icons",
+		event = "VeryLazy",
+	},
 	{
 		"echasnovski/mini.pairs",
 		version = false,
@@ -32,7 +34,6 @@ return {
 			require("mini.pairs").setup()
 		end,
 	},
-
 	{
 		"echasnovski/mini.surround",
 		version = false,
@@ -48,11 +49,12 @@ return {
 					highlight = "<leader>nh",
 					replace = "<leader>nr",
 					update_n_lines = "<leader>nn",
+					suffix_last = "l",
+					suffix_next = "n",
 				},
 			})
 		end,
 	},
-
 	{
 		"folke/which-key.nvim",
 		lazy = false,
@@ -73,16 +75,11 @@ return {
 			})
 		end,
 	},
-
 	{
 		"norcalli/nvim-colorizer.lua",
 		lazy = false,
 		event = "VeryLazy",
-		config = function()
-			require("colorizer").setup({ "*", css = { rgb_fn = true } })
-		end,
 	},
-
 	{
 		"xiyaowong/nvim-transparent",
 		lazy = false,
@@ -117,7 +114,6 @@ return {
 			vim.cmd("TransparentEnable")
 		end,
 	},
-
 	{
 		"rcarriga/nvim-notify",
 		lazy = true,
@@ -128,7 +124,6 @@ return {
 			vim.notify = notify
 		end,
 	},
-
 	{
 		"folke/todo-comments.nvim",
 		lazy = false,
@@ -138,17 +133,16 @@ return {
 			require("todo-comments").setup({
 				signs = true,
 				keywords = {
-					FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG" } },
-					TODO = { icon = " ", color = "info" },
-					HACK = { icon = " ", color = "warning" },
-					WARN = { icon = " ", color = "warning", alt = { "WARNING" } },
-					PERF = { icon = " ", alt = { "OPTIMIZE" } },
-					NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+					FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG" } },
+					TODO = { icon = " ", color = "info" },
+					HACK = { icon = " ", color = "warning" },
+					WARN = { icon = " ", color = "warning", alt = { "WARNING" } },
+					PERF = { icon = " ", alt = { "OPTIMIZE" } },
+					NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
 				},
 			})
 		end,
 	},
-
 	{
 		"kaarmu/typst.vim",
 		event = "VeryLazy",

@@ -31,7 +31,6 @@ return {
 					"ts_ls",
 					"html",
 					"cssls",
-					"jdtls",
 					"jsonls",
 					"vimls",
 					"marksman",

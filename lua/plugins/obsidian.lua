@@ -20,10 +20,10 @@ return {
 			ui = { enable = true },
 			frontmatter = { enable = true },
 			footer = {
-				enabled = false, -- turn it off
-				separator = false, -- turn it off
-				format = "{{backlinks}} backlinks  {{properties}} properties  {{words}} words  {{chars}} chars", -- works like the template system
-				hl_group = "@property", -- Use another hl group
+				enabled = false,
+				separator = false,
+				format = "{{backlinks}} backlinks  {{properties}} properties  {{words}} words  {{chars}} chars",
+				hl_group = "@property",
 			},
 			legacy_commands = false,
 			templates = {
