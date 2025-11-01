@@ -1,7 +1,7 @@
 return {
     {
         "epwalsh/obsidian.nvim",
-        version = "*", -- usa la última versión estable
+        version = "*",
         lazy = true,
         event = "VeryLazy",
         ft = "markdown",
@@ -32,7 +32,7 @@ return {
                 enable = true,
             },
 
-            disable_frontmatter = true, -- ✅ no agrega id, aliases ni tags automáticos
+            disable_frontmatter = true,
 
             note_id_func = function(title)
                 return title
@@ -67,15 +67,12 @@ return {
             local obsidian = require("obsidian")
             obsidian.setup(opts)
 
-            -- Ajuste visual: oculta caracteres markdown
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = "markdown",
                 callback = function()
                     vim.opt_local.conceallevel = 2
                 end,
             })
-
-            -- Mapeos personalizados
             local map = vim.keymap.set
             local key_opts = { noremap = true, silent = true }
 
@@ -86,9 +83,8 @@ return {
             map("n", "<leader>ob", ":ObsidianBacklinks<CR>", key_opts)
             map("n", "<leader>ot", ":ObsidianTemplate<CR>", key_opts)
 
-            -- Daily note personalizada
             map("n", "<leader>od", function()
-                local daily_dir = "/home/geudys/Escritorio/Obsidian/06 - Daily/Daily 2025/Daily 2025-10/"
+                local daily_dir = "/home/geudys/Escritorio/Obsidian/06 - Daily/Daily 2025/Daily 2025-11/"
                 local filename = "Daily " .. os.date("%Y-%m-%d") .. ".md"
                 local filepath = daily_dir .. filename
                 if vim.fn.filereadable(filepath) == 0 then
@@ -100,7 +96,6 @@ return {
                 vim.cmd("edit " .. filepath)
             end, { desc = "ObsidianDaily" }, key_opts)
 
-            -- Nota rápida única
             map("n", "<leader>ou", function()
                 local Path = require("plenary.path")
                 local target_dir = "/home/geudys/Escritorio/Obsidian/"
