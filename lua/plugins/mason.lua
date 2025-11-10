@@ -33,6 +33,8 @@ return {
                     "cssls",
                     "jsonls",
                     "vimls",
+                    "bashls",
+                    "fish_lsp",
                     -- "marksman",
                 },
             })
