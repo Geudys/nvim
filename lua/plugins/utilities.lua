@@ -170,7 +170,15 @@ return {
                     width_preview = 40,
                     preview_position = "right",
                 },
+                mappings = {
+                    go_in       = "L",
+                    go_out      = "H",
+
+                    go_in_plus  = "",
+                    go_out_plus = "",
+                },
             })
         end,
-    },
+    }
+
 }
