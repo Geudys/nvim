@@ -35,7 +35,7 @@ return {
                     "vimls",
                     "bashls",
                     "fish_lsp",
-                    -- "marksman",
+                    "markdown_oxide",
                 },
             })
         end,
@@ -44,7 +44,6 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         lazy = true,
         event = "VeryLazy",
-        dependencies = { "williamboman/mason.nvim" },
         config = function()
             require("mason-tool-installer").setup({
                 ensure_installed = {
@@ -56,6 +55,8 @@ return {
                     "pylint",
                     "eslint_d",
                 },
+                run_on_start = true,
+                auto_update = true,
             })
         end,
     },
