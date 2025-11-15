@@ -47,10 +47,10 @@ return {
             },
             signs = {
                 text = {
-                    [vim.diagnostic.severity.ERROR] = " ",
-                    [vim.diagnostic.severity.WARN] = " ",
+                    [vim.diagnostic.severity.ERROR] = " ",
+                    [vim.diagnostic.severity.WARN] = " ",
                     [vim.diagnostic.severity.HINT] = "󰠠 ",
-                    [vim.diagnostic.severity.INFO] = " ",
+                    [vim.diagnostic.severity.INFO] = " ",
                 },
             },
             float = {
@@ -67,6 +67,11 @@ return {
         vim.lsp.config("emmet_ls", {
             capabilities = capabilities,
             filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte", "vue" },
+        })
+
+        vim.lsp.config("markdown_oxide", {
+            capabilities = capabilities,
+            filetypes = { "markdown", "markdown_inline" },
         })
 
         vim.lsp.config("lua_ls", {
