@@ -84,7 +84,7 @@ return {
             map("n", "<leader>ot", ":ObsidianTemplate<CR>", key_opts)
 
             map("n", "<leader>od", function()
-                local daily_dir = "/home/geudys/Escritorio/Obsidian/07 - Daily/Daily 2025/Daily 2025-11/"
+                local daily_dir = "/home/geudys/Escritorio/Obsidian/06 - Daily/Daily 2025/Daily 2025-11/"
                 local filename = "Daily " .. os.date("%Y-%m-%d") .. ".md"
                 local filepath = daily_dir .. filename
                 if vim.fn.filereadable(filepath) == 0 then
