@@ -1,7 +1,6 @@
 return {
     {
-        "epwalsh/obsidian.nvim",
-        version = "*",
+        "obsidian-nvim/obsidian.nvim",
         lazy = true,
         event = "VeryLazy",
         ft = "markdown",
@@ -32,7 +31,9 @@ return {
                 enable = true,
             },
 
-            disable_frontmatter = true,
+            frontmatter = {
+                enabled = false
+            },
 
             note_id_func = function(title)
                 return title
@@ -76,12 +77,12 @@ return {
             local map = vim.keymap.set
             local key_opts = { noremap = true, silent = true }
 
-            map("n", "<leader>on", ":ObsidianNew<CR>", key_opts)
-            map("n", "<leader>oo", ":ObsidianQuickSwitch<CR>", key_opts)
-            map("n", "<leader>os", ":ObsidianSearch<CR>", key_opts)
-            map("n", "<leader>ol", ":ObsidianLink<CR>", key_opts)
-            map("n", "<leader>ob", ":ObsidianBacklinks<CR>", key_opts)
-            map("n", "<leader>ot", ":ObsidianTemplate<CR>", key_opts)
+            map("n", "<leader>on", ":Obsidian new<CR>", key_opts)
+            map("n", "<leader>oo", ":Obsidian quickSwitch<CR>", key_opts)
+            map("n", "<leader>os", ":Obsidian search<CR>", key_opts)
+            map("n", "<leader>ol", ":Obsidian link<CR>", key_opts)
+            map("n", "<leader>ob", ":Obsidian backlinks<CR>", key_opts)
+            map("n", "<leader>ot", ":Obsidian template<CR>", key_opts)
 
             map("n", "<leader>od", function()
                 local daily_dir = "/home/geudys/Escritorio/Obsidian/06 - Greed/Daily 2025/Daily 2025-11/"
@@ -94,7 +95,7 @@ return {
                     vim.notify("✅ Ya existe la Daily Note de hoy.", vim.log.levels.INFO)
                 end
                 vim.cmd("edit " .. filepath)
-            end, { desc = "ObsidianDaily" }, key_opts)
+            end, { desc = "Obsidian daily" })
 
             map("n", "<leader>ou", function()
                 local Path = require("plenary.path")
@@ -103,7 +104,7 @@ return {
                 local filepath = Path:new(target_dir .. filename)
                 vim.cmd("edit " .. filepath.filename)
                 vim.notify("📝 Nueva nota creada: " .. filename, vim.log.levels.INFO)
-            end, { desc = "ObsidianNote" }, key_opts)
+            end, { desc = "Obsidian note" })
         end,
     },
 }
