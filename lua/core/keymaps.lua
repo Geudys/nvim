@@ -4,6 +4,10 @@ local opts = { noremap = true, silent = true }
 
 vim.keymap.set("i", "<C-H>", "<C-W>")
 
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Guardar" })
+vim.keymap.set("n", "<leader>W", "<cmd>wa<CR>", { desc = "Todos" })
+vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Salir" })
+
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
@@ -27,8 +31,8 @@ vim.keymap.set("n", "<leader>ba", ":%bd<CR>", { desc = "Cerrar todos los buffers
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Nuevo buffer" })
 
 vim.keymap.set("n", "<leader>h", function()
-	vim.cmd.nohlsearch()
-	vim.fn.setreg("/", "")
+    vim.cmd.nohlsearch()
+    vim.fn.setreg("/", "")
 end, { desc = "Limpiar búsqueda" })
 
 vim.keymap.set("n", "<C-a>", "ggVG")
