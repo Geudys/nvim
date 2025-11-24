@@ -35,10 +35,6 @@ return {
                 enabled = false
             },
 
-            note_id_func = function(title)
-                return title
-            end,
-
             footer = {
                 enabled = false,
                 separator = false,
