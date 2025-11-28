@@ -148,4 +148,38 @@ return {
         event = "VeryLazy",
         ft = "typst",
     },
+    {
+        "nvim-mini/mini.files",
+        version = false,
+        lazy = true,
+        keys = {
+            {
+                "<leader>e",
+                function()
+                    require("mini.files").open(vim.api.nvim_buf_get_name(0))
+                end,
+                desc = "Abrir Mini Files",
+            },
+        },
+        config = function()
+            require("mini.files").setup({
+                windows = {
+                    preview = true,
+                    width_focus = 35,
+                    width_preview = 40,
+                    preview_position = "right",
+                },
+                mappings = {
+                    go_in = "L",
+                    go_out = "H",
+                    go_in_plus = "",
+                    go_out_plus = "",
+
+                },
+
+            })
+        end,
+
+
+    }
 }

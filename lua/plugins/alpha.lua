@@ -18,7 +18,10 @@ return {
             }
 
             dashboard.section.buttons.val = {
-                dashboard.button("e", "  Fyler", "<cmd>Fyler kind=split_left<cr>"),
+                dashboard.button("e", "  Mini files",
+                    function()
+                        require("mini.files").open(vim.api.nvim_buf_get_name(0))
+                    end),
                 dashboard.button("f", "  Search files", ":Telescope find_files<CR>"),
                 dashboard.button("r", "  Recents", ":Telescope oldfiles<CR>"),
                 dashboard.button("h", "  Check health", ":checkhealth<CR>"),
