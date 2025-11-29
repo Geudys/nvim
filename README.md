@@ -12,6 +12,7 @@ nvim/
 ├── init.lua
 ├── lua/
 │ ├── core/ -> Neovim options and keymaps
+│ ├── snippets/ -> Personal snippets
 │ └── plugins/ -> Plugins configurations
 ```
 
