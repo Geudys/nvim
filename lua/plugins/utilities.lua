@@ -7,7 +7,7 @@ return {
             require("flash").setup({
                 search = { case_sensitive = false, smart_case = false, incremental = false },
             })
-            vim.keymap.set({ "n", "x", "o" }, "s", function()
+            vim.keymap.set({ "n", "x", "o" }, "z", function()
                 require("flash").jump()
             end, { desc = "Flash search" })
         end,
@@ -36,24 +36,26 @@ return {
     },
     {
         "echasnovski/mini.surround",
-        version = false,
-        lazy = true,
-        event = "VeryLazy",
-        config = function()
-            require("mini.surround").setup({
-                mappings = {
-                    add = "<leader>na",
-                    delete = "<leader>nd",
-                    find = "<leader>nf",
-                    find_left = "<leader>nF",
-                    highlight = "<leader>nh",
-                    replace = "<leader>nr",
-                    update_n_lines = "<leader>nn",
-                    suffix_last = "l",
-                    suffix_next = "n",
-                },
-            })
-        end,
+        opts = {
+            custom_surroundings = nil,
+            highlight_duration = 500,
+            mappings = {
+                add = "sa",    -- Add surrounding in Normal and Visual modes
+                delete = "sd", -- Delete surrounding
+                find = "sf",   -- Find surrounding (to the right)
+                find_left = "sF", -- Find surrounding (to the left)
+                highlight = "sh", -- Highlight surrounding
+                replace = "sr", -- Replace surrounding
+                update_n_lines = "sn", -- Update `n_lines`
+
+                suffix_last = "l", -- Suffix to search with "prev" method
+                suffix_next = "n", -- Suffix to search with "next" method
+            },
+            n_lines = 20,
+            respect_selection_type = false,
+            search_method = "cover",
+            silent = false,
+        },
     },
     {
         "folke/which-key.nvim",
@@ -152,34 +154,4 @@ return {
         event = "VeryLazy",
         ft = "typst",
     },
-    {
-        "nvim-mini/mini.files",
-        version = false,
-        lazy = true,
-        keys = {
-            {
-                "<leader>e",
-                function()
-                    require("mini.files").open(vim.api.nvim_buf_get_name(0))
-                end,
-                desc = "Abrir Mini Files",
-            },
-        },
-        config = function()
-            require("mini.files").setup({
-                windows = {
-                    preview = true,
-                    width_focus = 35,
-                    width_preview = 40,
-                    preview_position = "right",
-                },
-                mappings = {
-                    go_in = "L",
-                    go_out = "H",
-                    go_in_plus = "",
-                    go_out_plus = "",
-                },
-            })
-        end,
-    }
 }
