@@ -4,8 +4,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.fillchars:append({ eob = " " })
 vim.opt.wrap = true
 vim.opt.linebreak = true
-vim.opt.spell = true
-vim.opt.spelllang = "es,en"
 vim.opt.breakindent = true
 vim.opt.scrolloff = 20
 vim.opt.sidescrolloff = 20
@@ -24,7 +22,7 @@ vim.opt.backup = false
 
 local undodir = vim.fn.expand("~/.vim/undodir")
 if vim.fn.isdirectory(undodir) == 0 then
-    vim.fn.mkdir(undodir, "p")
+	vim.fn.mkdir(undodir, "p")
 end
 vim.opt.undodir = undodir
 vim.opt.undofile = true
