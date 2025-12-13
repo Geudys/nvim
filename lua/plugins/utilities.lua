@@ -13,51 +13,6 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.comment",
-		version = false,
-		lazy = true,
-		keys = { { "gc", mode = { "n", "v" } }, { "gcc", mode = "n" } },
-		config = function()
-			require("mini.comment").setup()
-		end,
-	},
-	{
-		"echasnovski/mini.icons",
-		event = "VeryLazy",
-	},
-	{
-		"echasnovski/mini.pairs",
-		version = false,
-		lazy = true,
-		event = "InsertEnter",
-		config = function()
-			require("mini.pairs").setup()
-		end,
-	},
-	{
-		"echasnovski/mini.surround",
-		opts = {
-			custom_surroundings = nil,
-			highlight_duration = 500,
-			mappings = {
-				add = "sa",
-				delete = "sd",
-				find = "sf",
-				find_left = "sF",
-				highlight = "sh",
-				replace = "sr",
-				update_n_lines = "sn",
-
-				suffix_last = "l",
-				suffix_next = "n",
-			},
-			n_lines = 20,
-			respect_selection_type = false,
-			search_method = "cover",
-			silent = false,
-		},
-	},
-	{
 		"folke/which-key.nvim",
 		lazy = false,
 		event = "VeryLazy",
@@ -78,15 +33,6 @@ return {
 		end,
 	},
 	{
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup({
-				"*",
-				css = { rgb_fn = true },
-			})
-		end,
-	},
-	{
 		"xiyaowong/nvim-transparent",
 		lazy = false,
 		event = "VeryLazy",
@@ -94,27 +40,10 @@ return {
 			require("transparent").setup({
 				enable = true,
 				extra_groups = {
-					"Alpha",
 					"NormalFloat",
-					"NvimTreeNormal",
-					"BufferLineTabClose",
-					"TelescopeBorder",
-					"TelescopePrompt",
-					"TelescopeResults",
-					"TelescopeNormal",
-					"LualineNormal",
-					"Lualine",
-					"lualine",
-					"Barbecue",
 					"WhichKeyFloat",
-					"Pmenu",
 					"NotifyBackground",
 					"NoicePopup",
-					"NeoTreeNormal",
-					"DashboardHeader",
-					"DashboardCenter",
-					"DashboardFooter",
-					"Bufferline",
 				},
 			})
 			vim.cmd("TransparentEnable")
@@ -131,22 +60,13 @@ return {
 		end,
 	},
 	{
-		"folke/todo-comments.nvim",
-		lazy = false,
-		event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		"mbbill/undotree",
+		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			require("todo-comments").setup({
-				signs = true,
-				keywords = {
-					FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG" } },
-					TODO = { icon = " ", color = "info" },
-					HACK = { icon = " ", color = "warning" },
-					WARN = { icon = " ", color = "warning", alt = { "WARNING" } },
-					PERF = { icon = " ", alt = { "OPTIMIZE" } },
-					NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-				},
-			})
+			vim.g.undotree_WindowLayout = 3
+
+			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
 		end,
 	},
 	{
