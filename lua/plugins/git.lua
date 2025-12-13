@@ -22,26 +22,6 @@ return {
 	},
 
 	{
-		"TimUntersberger/neogit",
-		lazy = true,
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = { "nvim-lua/plenary.nvim" },
-		cmd = "Neogit",
-		keys = {
-			{
-				"<leader>go",
-				function()
-					require("neogit").open()
-				end,
-				desc = "Abrir Neogit",
-			},
-		},
-		config = function()
-			require("neogit").setup()
-		end,
-	},
-
-	{
 		"f-person/git-blame.nvim",
 		lazy = true,
 		event = { "BufReadPre", "BufNewFile" },
