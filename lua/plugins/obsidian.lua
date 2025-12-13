@@ -19,6 +19,10 @@ return {
 				min_chars = 3,
 			},
 
+			follow_url_func = function(url)
+				vim.fn.jobstart({ "xdg-open", url }, { detach = true })
+			end,
+
 			finder = {
 				max_results = 50,
 			},
