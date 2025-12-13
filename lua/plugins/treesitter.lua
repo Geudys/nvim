@@ -28,6 +28,7 @@ return {
 					"vimdoc",
 					"c",
 				},
+				auto_install = true,
 				incremental_selection = {
 					enable = true,
 					keymaps = {
@@ -39,7 +40,7 @@ return {
 				},
 			})
 
-			vim.treesitter.language.register("bash", "zsh", "fish")
+			vim.treesitter.language.register("bash", "fish")
 		end,
 	},
 	{
