@@ -32,7 +32,7 @@ return {
 			},
 
 			ui = {
-				enable = true,
+				enable = false,
 			},
 
 			frontmatter = {
@@ -111,15 +111,33 @@ return {
 		"MeanderingProgrammer/render-markdown.nvim",
 		opts = {
 			render_modes = { "n", "v", "i", "c" },
+
 			checkbox = {
 				unchecked = { icon = " " },
 				checked = { icon = " " },
+
 				custom = {
-					{ raw = "[>]", rendered = " " },
-					{ raw = "[!]", rendered = " " },
-					{ raw = "[~]", rendered = " " },
+					info = {
+						raw = "[>]",
+						rendered = " ",
+						highlight = "RenderMarkdownInfo",
+					},
+					warn = {
+						raw = "[!]",
+						rendered = " ",
+						highlight = "RenderMarkdownWarn",
+					},
+					error = {
+						raw = "[~]",
+						rendered = " ",
+						highlight = "RenderMarkdownError",
+					},
 				},
 			},
+
+			html = { enabled = false },
+			latex = { enabled = false },
+			yaml = { enabled = false },
 		},
 	},
 }
