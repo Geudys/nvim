@@ -3,7 +3,7 @@ return {
 		"echasnovski/mini.comment",
 		version = false,
 		lazy = true,
-		keys = { { "gc", mode = { "n", "v" } }, { "gcc", mode = "n" } },
+		keys = { { "gc", mode = { "v" } }, { "gcc", mode = "n" } },
 		config = function()
 			require("mini.comment").setup({
 				options = {
