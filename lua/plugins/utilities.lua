@@ -40,10 +40,27 @@ return {
 			require("transparent").setup({
 				enable = true,
 				extra_groups = {
+					"Alpha",
 					"NormalFloat",
+					"NvimTreeNormal",
+					"BufferLineTabClose",
+					"TelescopeBorder",
+					"TelescopePrompt",
+					"TelescopeResults",
+					"TelescopeNormal",
+					"LualineNormal",
+					"Lualine",
+					"lualine",
+					"Barbecue",
 					"WhichKeyFloat",
+					"Pmenu",
 					"NotifyBackground",
 					"NoicePopup",
+					"NeoTreeNormal",
+					"DashboardHeader",
+					"DashboardCenter",
+					"DashboardFooter",
+					"Bufferline",
 				},
 			})
 			vim.cmd("TransparentEnable")
