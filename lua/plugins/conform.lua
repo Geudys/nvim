@@ -1,71 +1,100 @@
 return {
-    {
-        "stevearc/conform.nvim",
-        lazy = true,
-        event = { "BufWritePre" },
-        cmd = { "ConformInfo" },
-        keys = {
-            {
-                "<leader>mp",
-                function()
-                    require("conform").format({ async = true, lsp_fallback = true, timeout_ms = 3000 })
-                end,
-                desc = "Formatear código",
-                mode = { "n", "v" },
-            },
-            {
-                "<leader>mf",
-                function()
-                    local formatters = require("conform").list_formatters()
-                    if #formatters == 0 then
-                        vim.notify("No hay formateadores disponibles para este tipo de archivo", vim.log.levels.WARN)
-                    else
-                        local names = {}
-                        for _, formatter in ipairs(formatters) do
-                            table.insert(names, formatter.name)
-                        end
-                        vim.notify("Formateadores disponibles: " .. table.concat(names, ", "), vim.log.levels.INFO)
-                    end
-                end,
-                desc = "Listar formateadores disponibles",
-            },
-        },
-        config = function()
-            require("conform").setup({
-                formatters_by_ft = {
-                    lua = { "stylua" },
-                    go = { "gofmt" },
-                    rust = { "rustfmt" },
-                    html = { "prettier" },
-                    css = { "prettier" },
-                    scss = { "prettier" },
-                    javascript = { "prettier" },
-                    typescript = { "prettier" },
-                    javascriptreact = { "prettier" },
-                    typescriptreact = { "prettier" },
-                    markdown = { "prettier" },
-                    json = { "prettier" },
-                    jsonc = { "prettier" },
-                    yaml = { "prettier" },
-                    yml = { "prettier" },
-                    python = { "black", "isort" },
-                },
-                formatters = {
-                    prettier = {
-                        prepend_args = {
-                            "--tab-width=4",
-                            "--use-tabs=false",
-                            "--single-quote=true",
-                            "--trailing-comma=es5",
-                            "--semi=true",
-                            "--bracket-spacing=true",
-                            "--arrow-parens=avoid",
-                        },
-                    },
-                },
-                default_format_opts = { lsp_fallback = true },
-                format_on_save = { timeout_ms = 3000, lsp_fallback = true },
-            })
-        end,
-    },
+	{
+		"stevearc/conform.nvim",
+		lazy = true,
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+
+		keys = {
+			{
+				"<leader>mp",
+				function()
+					require("conform").format({
+						async = true,
+						lsp_fallback = true,
+						timeout_ms = 3000,
+					})
+				end,
+				desc = "Formatear archivo",
+				mode = { "n", "v" },
+			},
+			{
+				"<leader>mf",
+				function()
+					local conform = require("conform")
+					local formatters = conform.list_formatters()
+					if #formatters == 0 then
+						vim.notify("No hay formateadores para este tipo de archivo", vim.log.levels.WARN)
+						return
+					end
+
+					local names = vim.tbl_map(function(f)
+						return f.name
+					end, formatters)
+
+					vim.notify("Formateadores activos: " .. table.concat(names, ", "), vim.log.levels.INFO)
+				end,
+				desc = "Listar formateadores",
+			},
+		},
+
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					go = { "gofmt" },
+					rust = { "rustfmt" },
+
+					javascript = { "prettier" },
+					typescript = { "prettier" },
+					javascriptreact = { "prettier" },
+					typescriptreact = { "prettier" },
+
+					html = { "prettier" },
+					css = { "prettier" },
+					scss = { "prettier" },
+
+					json = { "prettier" },
+					jsonc = { "prettier" },
+					yaml = { "prettier" },
+					yml = { "prettier" },
+
+					markdown = { "prettier" },
+
+					python = { "isort", "black" },
+				},
+
+				formatters = {
+					prettier = {
+						prepend_args = {
+							"--tab-width=4",
+							"--use-tabs=false",
+
+							"--prose-wrap=preserve",
+							"--print-width=80",
+
+							"--bracket-spacing=true",
+						},
+					},
+				},
+
+				format_on_save = function(bufnr)
+					local ft = vim.bo[bufnr].filetype
+
+					if ft == "markdown" then
+						return
+					end
+
+					return {
+						timeout_ms = 3000,
+						lsp_fallback = true,
+					}
+				end,
+
+				default_format_opts = {
+					lsp_fallback = true,
+				},
+			})
+		end,
+	},
 }
