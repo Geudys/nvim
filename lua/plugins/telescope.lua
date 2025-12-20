@@ -1,42 +1,80 @@
 return {
-    {
-        "nvim-telescope/telescope.nvim",
-        lazy = false,
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local telescope = require("telescope")
-            local builtin = require("telescope.builtin")
+	{
+		"nvim-telescope/telescope.nvim",
+		lazy = true,
+		cmd = "Telescope",
+		dependencies = { "nvim-lua/plenary.nvim" },
 
-            telescope.setup({
-                pickers = {
-                    find_files = {
-                        hidden = true,
-                        no_ignore = true,
-                        no_ignore_parent = true,
-                    },
-                },
-            })
+		config = function()
+			local telescope = require("telescope")
+			local builtin = require("telescope.builtin")
 
-            vim.keymap.set("n", "<leader><leader>", builtin.find_files)
-            vim.keymap.set("n", "<leader>tf", builtin.find_files)
-            vim.keymap.set("n", "<leader>ti", "<cmd>Telescope live_grep<CR>")
-            vim.keymap.set("n", "<leader>td", "<cmd>Telescope diagnostics<CR>")
-            vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<CR>")
-            vim.keymap.set("n", "<leader>tr", "<cmd>Telescope oldfiles<CR>")
-            vim.keymap.set("n", "<leader>tc", "<cmd>Telescope grep_string<CR>")
-            vim.keymap.set("n", "<leader>tk", "<cmd>Telescope keymaps<CR>")
-            vim.keymap.set("n", "<leader>tl", "<cmd>Telescope lazy<CR>")
-            vim.keymap.set("n", "<leader>tgc", "<cmd>Telescope git_commits<CR>")
-            vim.keymap.set("n", "<leader>tgf", "<cmd>Telescope git_files<CR>")
-            vim.keymap.set("n", "<leader>tgb", "<cmd>Telescope git_branches<CR>")
-            vim.keymap.set("n", "<leader>tgs", "<cmd>Telescope git_status<CR>")
-            vim.keymap.set("n", "<leader>tld", "<cmd>lsp_definitions<CR>")
-            vim.keymap.set("n", "<leader>tlr", "<cmd>lsp_references<CR>")
-            vim.keymap.set("n", "<leader>tli", "<cmd>lsp_implementations<CR>")
-            vim.keymap.set("n", "<leader>tlt", "<cmd>lsp_type_definitions<CR>")
-            vim.keymap.set("n", "<leader>tls", "<cmd>lsp_document_symbols<CR>")
-            vim.keymap.set("n", "<leader>tlS", "<cmd>lsp_workspace_symbols<CR>")
-            vim.keymap.set("n", "<leader>tlD", "<cmd>lsp_dynamic_workspace_symbols<CR>")
-        end,
-    },
+			telescope.setup({
+				defaults = {
+					prompt_prefix = "  ",
+					selection_caret = " ",
+					path_display = { "smart" },
+					sorting_strategy = "ascending",
+					layout_config = {
+						horizontal = {
+							prompt_position = "top",
+							preview_width = 0.35,
+						},
+					},
+				},
+			})
+
+			local map = vim.keymap.set
+			local opts = { noremap = true, silent = true }
+
+			map("n", "<leader><leader>", builtin.find_files, { desc = "Buscar archivos", unpack(opts) })
+			map("n", "<leader>tb", builtin.buffers, { desc = "Buffers abiertos", unpack(opts) })
+			map("n", "<leader>tr", builtin.oldfiles, { desc = "Archivos recientes", unpack(opts) })
+			map("n", "<leader>tk", builtin.keymaps, { desc = "Keymaps", unpack(opts) })
+
+			map("n", "<leader>tF", function()
+				builtin.find_files({
+					hidden = true,
+					no_ignore = true,
+				})
+			end, { desc = "Buscar archivos (profundo)", unpack(opts) })
+
+			map("n", "<leader>ti", builtin.live_grep, { desc = "Buscar texto (live grep)", unpack(opts) })
+			map("n", "<leader>tc", builtin.grep_string, { desc = "Buscar palabra bajo cursor", unpack(opts) })
+
+			map("n", "<leader>tn", function()
+				builtin.find_files({
+					find_command = { "rg", "--files", "--glob", "*.md" },
+				})
+			end, { desc = "Buscar notas Markdown", unpack(opts) })
+
+			map("n", "<leader>tm", function()
+				builtin.live_grep({
+					glob_pattern = "*.md",
+				})
+			end, { desc = "Buscar texto en notas Markdown", unpack(opts) })
+
+			map("n", "<leader>tld", builtin.lsp_definitions, { desc = "LSP definiciones", unpack(opts) })
+			map("n", "<leader>tlr", builtin.lsp_references, { desc = "LSP referencias", unpack(opts) })
+			map("n", "<leader>tli", builtin.lsp_implementations, { desc = "LSP implementaciones", unpack(opts) })
+			map("n", "<leader>tlt", builtin.lsp_type_definitions, { desc = "LSP tipos", unpack(opts) })
+			map(
+				"n",
+				"<leader>tls",
+				builtin.lsp_document_symbols,
+				{ desc = "LSP símbolos del documento", unpack(opts) }
+			)
+			map(
+				"n",
+				"<leader>tlS",
+				builtin.lsp_workspace_symbols,
+				{ desc = "LSP símbolos del workspace", unpack(opts) }
+			)
+
+			map("n", "<leader>tgc", builtin.git_commits, { desc = "Git commits", unpack(opts) })
+			map("n", "<leader>tgf", builtin.git_files, { desc = "Git archivos", unpack(opts) })
+			map("n", "<leader>tgb", builtin.git_branches, { desc = "Git ramas", unpack(opts) })
+			map("n", "<leader>tgs", builtin.git_status, { desc = "Git estado", unpack(opts) })
+		end,
+	},
 }
