@@ -78,13 +78,7 @@ return {
 					},
 				},
 
-				format_on_save = function(bufnr)
-					local ft = vim.bo[bufnr].filetype
-
-					if ft == "markdown" then
-						return
-					end
-
+				format_on_save = function()
 					return {
 						timeout_ms = 3000,
 						lsp_fallback = true,
