@@ -92,8 +92,6 @@ return {
 			float = {
 				source = true,
 				border = "rounded",
-				header = "",
-				prefix = "",
 			},
 			update_in_insert = false,
 			severity_sort = true,
@@ -193,68 +191,6 @@ return {
 					},
 				},
 			},
-		})
-
-		vim.lsp.config("html", {
-			capabilities = capabilities,
-			filetypes = { "html", "templ" },
-		})
-
-		vim.lsp.config("cssls", {
-			capabilities = capabilities,
-			settings = {
-				css = {
-					validate = true,
-					lint = {
-						unknownAtRules = "ignore",
-					},
-				},
-				scss = {
-					validate = true,
-					lint = {
-						unknownAtRules = "ignore",
-					},
-				},
-				less = {
-					validate = true,
-					lint = {
-						unknownAtRules = "ignore",
-					},
-				},
-			},
-		})
-
-		vim.lsp.config("jsonls", {
-			capabilities = capabilities,
-			settings = {
-				json = {
-					validate = { enable = true },
-				},
-			},
-		})
-
-		vim.lsp.config("bashls", {
-			capabilities = capabilities,
-			filetypes = { "sh", "bash" },
-		})
-
-		vim.lsp.config("fish_lsp", {
-			capabilities = capabilities,
-			filetypes = { "fish" },
-		})
-
-		vim.lsp.enable({
-			"emmet_ls",
-			"pyright",
-			"eslint",
-			"lua_ls",
-			"rust_analyzer",
-			"ts_ls",
-			"html",
-			"cssls",
-			"jsonls",
-			"bashls",
-			"fish_lsp",
 		})
 	end,
 }
