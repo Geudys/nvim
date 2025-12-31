@@ -13,22 +13,6 @@ return {
 				desc = "Formatear código",
 				mode = { "n", "v" },
 			},
-			{
-				"<leader>mf",
-				function()
-					local formatters = require("conform").list_formatters()
-					if #formatters == 0 then
-						vim.notify("No hay formateadores disponibles para este tipo de archivo", vim.log.levels.WARN)
-					else
-						local names = {}
-						for _, formatter in ipairs(formatters) do
-							table.insert(names, formatter.name)
-						end
-						vim.notify("Formateadores disponibles: " .. table.concat(names, ", "), vim.log.levels.INFO)
-					end
-				end,
-				desc = "Listar formateadores disponibles",
-			},
 		},
 		config = function()
 			require("conform").setup({
