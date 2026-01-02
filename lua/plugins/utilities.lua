@@ -91,8 +91,4 @@ return {
 		event = "VeryLazy",
 		ft = "typst",
 	},
-	{
-		"sphamba/smear-cursor.nvim",
-		opts = {},
-	},
 }
