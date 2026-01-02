@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "folke/neodev.nvim", opts = {} },
+		{ "j-hui/fidget.nvim", opts = {} },
 	},
 	config = function()
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
