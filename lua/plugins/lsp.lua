@@ -46,32 +46,6 @@ return {
 					"<cmd>Telescope lsp_type_definitions<CR>",
 					vim.tbl_extend("force", opts, { desc = "Show LSP type definitions" })
 				)
-				keymap(
-					{ "n", "v" },
-					"<leader>ca",
-					vim.lsp.buf.code_action,
-					vim.tbl_extend("force", opts, { desc = "Code actions" })
-				)
-				keymap("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
-				keymap(
-					"n",
-					"<leader>rD",
-					"<cmd>Telescope diagnostics bufnr=0<CR>",
-					vim.tbl_extend("force", opts, { desc = "Buffer diagnostics" })
-				)
-				keymap(
-					"n",
-					"<leader>rd",
-					vim.diagnostic.open_float,
-					vim.tbl_extend("force", opts, { desc = "Line diagnostics" })
-				)
-				keymap("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover docs" }))
-				keymap(
-					"n",
-					"<leader>rs",
-					"<cmd>LspRestart<CR>",
-					vim.tbl_extend("force", opts, { desc = "Restart LSP" })
-				)
 			end,
 		})
 
