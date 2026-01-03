@@ -73,10 +73,11 @@ return {
 			local map = vim.keymap.set
 			local key_opts = { noremap = true, silent = true }
 
-			map("n", "<leader>on", ":Obsidian new<CR>", key_opts)
-			map("n", "<leader>oo", ":Obsidian quickSwitch<CR>", key_opts)
-			map("n", "<leader>os", ":Obsidian search<CR>", key_opts)
-			map("n", "<leader>ol", ":Obsidian link<CR>", key_opts)
+			map("n", "<leader>oo", ":Obsidian tags<CR>", key_opts)
+			map("n", "<leader>os", ":Obsidian quick_switch<CR>", key_opts)
+			map("n", "<leader>or", ":Obsidian rename<CR>", key_opts)
+			map("n", "<leader>of", ":Obsidian search<CR>", key_opts)
+			map("n", "<leader>ol", ":Obsidian links<CR>", key_opts)
 			map("n", "<leader>ob", ":Obsidian backlinks<CR>", key_opts)
 			map("n", "<leader>ot", ":Obsidian template<CR>", key_opts)
 

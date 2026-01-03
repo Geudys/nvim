@@ -42,18 +42,6 @@ return {
 			map("n", "<leader>ti", builtin.live_grep, { desc = "Buscar texto (live grep)", unpack(opts) })
 			map("n", "<leader>tc", builtin.grep_string, { desc = "Buscar palabra bajo cursor", unpack(opts) })
 
-			map("n", "<leader>tn", function()
-				builtin.find_files({
-					find_command = { "rg", "--files", "--glob", "*.md" },
-				})
-			end, { desc = "Buscar notas Markdown", unpack(opts) })
-
-			map("n", "<leader>tm", function()
-				builtin.live_grep({
-					glob_pattern = "*.md",
-				})
-			end, { desc = "Buscar texto en notas Markdown", unpack(opts) })
-
 			map("n", "<leader>tld", builtin.lsp_definitions, { desc = "LSP definiciones", unpack(opts) })
 			map("n", "<leader>tlr", builtin.lsp_references, { desc = "LSP referencias", unpack(opts) })
 			map("n", "<leader>tli", builtin.lsp_implementations, { desc = "LSP implementaciones", unpack(opts) })
