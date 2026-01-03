@@ -15,37 +15,31 @@ return {
 			callback = function(ev)
 				local opts = { buffer = ev.buf, silent = true }
 				local keymap = vim.keymap.set
+				local extend = vim.tbl_extend
 
-				keymap(
-					"n",
-					"gR",
-					"<cmd>Telescope lsp_references<CR>",
-					vim.tbl_extend("force", opts, { desc = "Show LSP references" })
-				)
-				keymap(
-					"n",
-					"gD",
-					vim.lsp.buf.declaration,
-					vim.tbl_extend("force", opts, { desc = "Go to declaration" })
-				)
-				keymap(
-					"n",
-					"gd",
-					"<cmd>Telescope lsp_definitions<CR>",
-					vim.tbl_extend("force", opts, { desc = "Show LSP definitions" })
-				)
-				keymap(
-					"n",
-					"gi",
-					"<cmd>Telescope lsp_implementations<CR>",
-					vim.tbl_extend("force", opts, { desc = "Show LSP implementations" })
-				)
-				keymap(
-					"n",
-					"gt",
-					"<cmd>Telescope lsp_type_definitions<CR>",
-					vim.tbl_extend("force", opts, { desc = "Show LSP type definitions" })
-				)
+				local function map(mode, lhs, rhs, desc)
+					keymap(mode, lhs, rhs, extend("force", opts, { desc = desc }))
+				end
+
+				map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "LSP: Go to definition")
+				map("n", "gD", vim.lsp.buf.declaration, "LSP: Go to declaration")
+				map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "LSP: Go to implementation")
+				map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "LSP: Go to type definition")
+				map("n", "gr", "<cmd>Telescope lsp_references<CR>", "LSP: Show references")
+
+				map("n", "K", vim.lsp.buf.hover, "LSP: Hover documentation")
+				map("n", "<C-k>", vim.lsp.buf.signature_help, "LSP: Signature help")
+
+				map("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics: Buffer diagnostics")
+				map("n", "<leader>d", vim.diagnostic.open_float, "Diagnostics: Line diagnostics")
+
+				map("n", "[d", function()
+					vim.diagnostic.jump({ count = -1, float = true })
+				end, "Diagnostics: Previous")
+
+				map("n", "]d", function()
+					vim.diagnostic.jump({ count = 1, float = true })
+				end, "Diagnostics: Next")
 			end,
 		})
 
