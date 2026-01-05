@@ -31,8 +31,8 @@ vim.keymap.set("n", "<leader>ba", ":%bd<CR>", { desc = "Cerrar todos los buffers
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Nuevo buffer" })
 
 vim.keymap.set("n", "<leader>h", function()
-    vim.cmd.nohlsearch()
-    vim.fn.setreg("/", "")
+	vim.cmd.nohlsearch()
+	vim.fn.setreg("/", "")
 end, { desc = "Limpiar búsqueda" })
 
 vim.keymap.set("n", "<C-a>", "ggVG")
@@ -44,6 +44,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copiar al sistema" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copiar línea al sistema" })
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Borrar sin copiar" })
+vim.keymap.set({ "n", "v" }, "<leader>x", [["_d]], { desc = "Borrar sin copiar" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Pegar sin sobrescribir" })
 vim.keymap.set("n", "<leader>P", [["+p]], { desc = "Pegar desde el sistema" })
