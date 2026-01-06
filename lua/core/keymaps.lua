@@ -35,6 +35,10 @@ vim.keymap.set("n", "<leader>h", function()
 	vim.fn.setreg("/", "")
 end, { desc = "Limpiar búsqueda" })
 
+vim.keymap.set("n", "gu", "z=", { desc = "spelling suggestion" })
+vim.keymap.set("n", "ga", "zg", { desc = "add to dictionary" })
+vim.keymap.set("n", "gA", "zug", { desc = "delete from dictionary" })
+
 vim.keymap.set("n", "<C-a>", "ggVG")
 vim.keymap.set("n", "<C-x>", [[ggVG"_d]])
 vim.keymap.set("n", "<C-c>", [[ggVG"_c]])
