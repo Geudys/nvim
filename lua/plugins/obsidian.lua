@@ -136,4 +136,20 @@ return {
 			yaml = { enabled = false },
 		},
 	},
+	{
+		"iamcco/markdown-preview.nvim",
+		event = "VeryLazy",
+		ft = "markdown",
+		keys = {
+			{
+				"<leader>op",
+				ft = "markdown",
+				"<cmd>MarkdownPreviewToggle<cr>",
+				desc = "Markdown Preview",
+			},
+		},
+		init = function()
+			vim.g.mkdp_page_title = "${name}"
+		end,
+	},
 }
