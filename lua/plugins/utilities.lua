@@ -7,7 +7,7 @@ return {
 			require("flash").setup({
 				search = { case_sensitive = false, smart_case = false, incremental = false },
 			})
-			vim.keymap.set({ "n", "x", "o" }, "z", function()
+			vim.keymap.set({ "n", "x", "o" }, "zz", function()
 				require("flash").jump()
 			end, { desc = "Flash search" })
 		end,
