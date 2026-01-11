@@ -42,4 +42,9 @@ return {
 			{ "<leader>gl", "<cmd>LazyGit<CR>", desc = "Abrir LazyGit" },
 		},
 	},
+	{
+		"sindrets/diffview.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+	},
 }
