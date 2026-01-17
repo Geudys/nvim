@@ -93,6 +93,13 @@ return {
 	},
 
 	{
+		"chomosuke/typst-preview.nvim",
+		lazy = false,
+		version = "1.*",
+		opts = {},
+	},
+
+	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		event = "VeryLazy",
@@ -101,52 +108,15 @@ return {
 			sign_priority = 8,
 
 			keywords = {
-				FIXME = {
-					icon = "",
-					color = "error",
-					alt = { "BUG", "FIX", "BROKEN" },
-				},
-
-				SECURITY = {
-					icon = "󰒃",
-					color = "error",
-				},
-
-				TODO = {
-					icon = "",
-					color = "warning",
-				},
-
-				HACK = {
-					icon = "",
-					color = "warning",
-				},
-
-				OPTIMIZE = {
-					icon = "󰓅",
-					color = "warning",
-					alt = { "PERF", "PERFORMANCE" },
-				},
-
-				NOTE = {
-					icon = "󰍨",
-					color = "info",
-					alt = { "INFO" },
-				},
-				REVIEW = {
-					icon = "󰆈",
-					color = "hint",
-				},
-
-				DEPRECATED = {
-					icon = "󰂭",
-					color = "warning",
-				},
-
-				REFACTOR = {
-					icon = "󰑓",
-					color = "hint",
-				},
+				FIXME = { icon = "", color = "error", alt = { "BUG", "FIX", "BROKEN" } },
+				SECURITY = { icon = "󰒃", color = "error" },
+				TODO = { icon = "", color = "warning" },
+				HACK = { icon = "", color = "warning" },
+				OPTIMIZE = { icon = "󰓅", color = "warning", alt = { "PERF", "PERFORMANCE" } },
+				NOTE = { icon = "󰍨", color = "info", alt = { "INFO" } },
+				REVIEW = { icon = "󰆈", color = "hint" },
+				DEPRECATED = { icon = "󰂭", color = "warning" },
+				REFACTOR = { icon = "󰑓", color = "hint" },
 			},
 		},
 	},

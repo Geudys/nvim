@@ -27,6 +27,7 @@ return {
 					"gitignore",
 					"vimdoc",
 					"c",
+					"typst",
 				},
 				auto_install = true,
 				incremental_selection = {
