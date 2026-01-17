@@ -61,6 +61,8 @@ return {
 					"DashboardCenter",
 					"DashboardFooter",
 					"Bufferline",
+					"NormalFloat",
+					"FloatBorder",
 				},
 			})
 			vim.cmd("TransparentEnable")
