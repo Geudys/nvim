@@ -30,6 +30,13 @@ vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Cerrar otros buff
 vim.keymap.set("n", "<leader>ba", ":%bd<CR>", { desc = "Cerrar todos los buffers" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Nuevo buffer" })
 
+vim.keymap.set("n", "<leader>r", function()
+	local default = vim.fn.expand("<cword>")
+	local search = vim.fn.input("Buscar: ", default)
+	local replace = vim.fn.input("Reemplazar con: ")
+	vim.cmd("%s/" .. search .. "/" .. replace .. "/gc")
+end, { desc = "Remplazar" })
+
 vim.keymap.set("n", "<leader>h", function()
 	vim.cmd.nohlsearch()
 	vim.fn.setreg("/", "")
