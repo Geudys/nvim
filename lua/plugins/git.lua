@@ -17,7 +17,6 @@ return {
 			vim.keymap.set("n", "<leader>gb", function()
 				gs.blame_line({ full = true })
 			end, { desc = "Blame línea actual" })
-			vim.keymap.set("n", "<leader>gd", gs.diffthis, { desc = "Diff contra HEAD" })
 		end,
 	},
 
@@ -46,5 +45,9 @@ return {
 		"sindrets/diffview.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+		keys = {
+			{ "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Abrir Diffview" },
+			{ "<leader>go", "<cmd>DiffviewClose<CR>", desc = "Cerrar Diffview" },
+		},
 	},
 }
