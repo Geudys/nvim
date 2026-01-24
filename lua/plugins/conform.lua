@@ -34,19 +34,6 @@ return {
 					yml = { "prettier" },
 					python = { "black", "isort" },
 				},
-				formatters = {
-					prettier = {
-						prepend_args = {
-							"--tab-width=4",
-							"--use-tabs=false",
-							"--single-quote=true",
-							"--trailing-comma=es5",
-							"--semi=true",
-							"--bracket-spacing=true",
-							"--arrow-parens=avoid",
-						},
-					},
-				},
 				default_format_opts = { lsp_fallback = true },
 				format_on_save = { timeout_ms = 3000, lsp_fallback = true },
 			})
