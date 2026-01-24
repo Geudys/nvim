@@ -120,6 +120,7 @@ return {
 				DEPRECATED = { icon = "󰂭", color = "warning" },
 				REFACTOR = { icon = "󰑓", color = "hint" },
 			},
+			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { desc = "TODO comments" }),
 		},
 	},
 }
