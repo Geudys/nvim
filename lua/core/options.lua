@@ -14,10 +14,9 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 vim.opt.tabstop = 8
-vim.opt.softtabstop = 8
 vim.opt.shiftwidth = 8
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.opt.softtabstop = 8
+vim.opt.expandtab = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false

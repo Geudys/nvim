@@ -37,12 +37,13 @@ return {
 				formatters = {
 					prettier = {
 						prepend_args = {
+							"--use-tabs",
 							"--tab-width=8",
-							"--use-tabs=true",
-							"--single-quote=true",
+
+							"--single-quote",
 							"--trailing-comma=es5",
-							"--semi=true",
-							"--bracket-spacing=true",
+							"--semi",
+							"--bracket-spacing",
 							"--arrow-parens=avoid",
 						},
 					},
