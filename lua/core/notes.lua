@@ -1,11 +1,41 @@
 local M = {}
 
--- Path
-M.vault = "/home/geudys/Desktop/Obsidian/"
-M.templates_dir = M.vault .. "99 - Templates/"
+-- Config
+M.config = {
+	vault = "/home/geudys/Desktop/Obsidian/",
+	templates_dir = "99 - Templates/",
+}
 
--- Helpers
-local function edit_or_create(path)
+local VAULT = M.config.vault
+local TEMPLATES = VAULT .. M.config.templates_dir
+
+-- Telescope global setup
+require("telescope").setup({
+	defaults = {
+		prompt_prefix = "  ",
+		selection_caret = " ",
+		path_display = { "smart" },
+		sorting_strategy = "ascending",
+		layout_config = {
+			horizontal = {
+				prompt_position = "top",
+				preview_width = 0.35,
+			},
+		},
+	},
+})
+
+-- Requires
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local conf = require("telescope.config").values
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+
+-- Helpers: FS
+local fs = {}
+
+function fs.edit_or_create(path)
 	if vim.fn.filereadable(path) == 0 then
 		vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
 		vim.fn.writefile({}, path)
@@ -13,107 +43,35 @@ local function edit_or_create(path)
 	vim.cmd("edit " .. vim.fn.fnameescape(path))
 end
 
-local function insert_lines_at_top(lines)
-	vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+function fs.find_md(root)
+	return vim.fn.globpath(root, "**/*.md", false, true)
 end
 
--- Notes
-function M.new_note()
-	local filename = "- " .. os.date("%Y%m%d%H%M") .. ".md"
-	local path = M.vault .. filename
-	edit_or_create(path)
+-- Relative path the vault
+function fs.relative(path)
+	return path:gsub("^" .. vim.pesc(VAULT), "")
 end
 
-function M.daily_note()
-	local dir = M.vault .. "05 - Daily/Daily 2026/Daily 2026-01/"
-	local filename = "Daily " .. os.date("%Y-%m-%d") .. ".md"
-	local path = dir .. filename
-	edit_or_create(path)
-end
+-- Helpers: Buffer
+local buffer = {}
 
--- Template substitutions
-local function apply_substitutions(lines)
-	local date = os.date("%Y-%m-%d")
-	local time = os.date("%H:%M")
-	local datetime = os.date("%Y%m%d%H%M")
-
-	local out = {}
-
-	for _, line in ipairs(lines) do
-		line = line:gsub("{{Date}}", date)
-		line = line:gsub("{{Time}}", time)
-		line = line:gsub("{{Date:YYYYMMDDHHmm}}", datetime)
-		table.insert(out, line)
-	end
-
-	return out
-end
-
--- Templates
-function M.pick_template()
-	local ok = pcall(require, "telescope")
-	if not ok then
-		vim.notify("Telescope no está disponible", vim.log.levels.ERROR)
-		return
-	end
-
-	local pickers = require("telescope.pickers")
-	local finders = require("telescope.finders")
-	local conf = require("telescope.config").values
-	local actions = require("telescope.actions")
-	local action_state = require("telescope.actions.state")
-
-	local templates = vim.fn.glob(M.templates_dir .. "*.md", false, true)
-	if vim.tbl_isempty(templates) then
-		vim.notify("No hay templates en " .. M.templates_dir, vim.log.levels.WARN)
-		return
-	end
-
-	pickers
-		.new({}, {
-			prompt_title = "Templates",
-			finder = finders.new_table({
-				results = templates,
-				entry_maker = function(path)
-					return {
-						value = path,
-						display = vim.fn.fnamemodify(path, ":t"),
-						ordinal = path,
-						path = path,
-					}
-				end,
-			}),
-			sorter = conf.generic_sorter({}),
-			attach_mappings = function(prompt_bufnr, _)
-				actions.select_default:replace(function()
-					actions.close(prompt_bufnr)
-					local entry = action_state.get_selected_entry()
-					if not entry or not entry.path then
-						return
-					end
-
-					local raw = vim.fn.readfile(entry.path)
-					local lines = apply_substitutions(raw)
-					insert_lines_at_top(lines)
-				end)
-				return true
-			end,
-		})
-		:find()
-end
-
--- Methods
-local function current_note_name()
-	return vim.fn.expand("%:t:r")
-end
-
-local function read_current_buffer()
+function buffer.read()
 	return vim.api.nvim_buf_get_lines(0, 0, -1, false)
 end
 
-local function unique(list)
-	local seen = {}
-	local out = {}
+function buffer.insert_top(lines)
+	vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+end
+
+function buffer.current_note()
+	return vim.fn.expand("%:t:r")
+end
+
+-- Helpers: Utils
+local utils = {}
+
+function utils.unique(list)
+	local seen, out = {}, {}
 	for _, v in ipairs(list) do
 		if not seen[v] then
 			seen[v] = true
@@ -123,26 +81,93 @@ local function unique(list)
 	return out
 end
 
--- Backlinks
-function M.backlinks()
-	local note = current_note_name()
-	local cmd = {
-		"rg",
-		"\\[\\[" .. note .. "(\\||\\]\\])",
-		M.vault,
-		"--glob",
-		"*.md",
-	}
+-- Helpers: Telescope
+local function open_picker(opts)
+	pickers
+		.new({}, {
+			prompt_title = opts.title,
+			finder = finders.new_table({
+				results = opts.results,
+				entry_maker = opts.entry_maker,
+			}),
+			sorter = conf.generic_sorter({}),
+			previewer = conf.file_previewer({}),
+			attach_mappings = opts.attach,
+		})
+		:find()
+end
 
-	local results = vim.fn.systemlist(cmd)
-	if vim.v.shell_error ~= 0 then
-		vim.notify("rg no encontrado o error", vim.log.levels.ERROR)
-		return
+-- Templates
+local function apply_template(lines)
+	local date = os.date("%Y-%m-%d")
+	local time = os.date("%H:%M")
+	local datetime = os.date("%Y%m%d%H%M")
+
+	local out = {}
+	for _, line in ipairs(lines) do
+		line = line:gsub("{{Date}}", date):gsub("{{Time}}", time):gsub("{{Date:YYYYMMDDHHmm}}", datetime)
+		table.insert(out, line)
+	end
+	return out
+end
+
+function M.pick_template()
+	local templates = vim.fn.glob(TEMPLATES .. "*.md", false, true)
+	if vim.tbl_isempty(templates) then
+		return vim.notify("No hay templates", vim.log.levels.WARN)
 	end
 
-	if #results == 0 then
-		vim.notify("No hay backlinks")
-		return
+	open_picker({
+		title = "Templates",
+		results = templates,
+		entry_maker = function(path)
+			local rel = fs.relative(path)
+			return {
+				value = path,
+				display = rel,
+				ordinal = rel,
+				path = path,
+			}
+		end,
+		attach = function(buf)
+			actions.select_default:replace(function()
+				actions.close(buf)
+				local e = action_state.get_selected_entry()
+				if not e or not e.path then
+					return
+				end
+				buffer.insert_top(apply_template(vim.fn.readfile(e.path)))
+			end)
+			return true
+		end,
+	})
+end
+
+-- Notes
+function M.new_note()
+	local name = "- " .. os.date("%Y%m%d%H%M") .. ".md"
+	fs.edit_or_create(VAULT .. name)
+end
+
+function M.daily_note()
+	local dir = VAULT .. "05 - Daily/Daily 2026/Daily 2026-01/"
+	local name = "Daily " .. os.date("%Y-%m-%d") .. ".md"
+	fs.edit_or_create(dir .. name)
+end
+
+-- Backlinks
+function M.backlinks()
+	local note = buffer.current_note()
+	local results = vim.fn.systemlist({
+		"rg",
+		"\\[\\[" .. note .. "(\\||\\]\\])",
+		VAULT,
+		"--glob",
+		"*.md",
+	})
+
+	if vim.v.shell_error ~= 0 or #results == 0 then
+		return vim.notify("No hay backlinks")
 	end
 
 	local files = {}
@@ -153,128 +178,97 @@ function M.backlinks()
 		end
 	end
 
-	files = unique(files)
-
-	require("telescope.pickers")
-		.new({}, {
-			prompt_title = "Backlinks",
-			finder = require("telescope.finders").new_table(files),
-			sorter = require("telescope.config").values.generic_sorter({}),
-		})
-		:find()
+	open_picker({
+		title = "Backlinks",
+		results = utils.unique(files),
+		entry_maker = function(path)
+			local rel = fs.relative(path)
+			return {
+				value = path,
+				display = rel,
+				ordinal = rel,
+				path = path,
+			}
+		end,
+	})
 end
 
 -- Links
 function M.links()
-	local lines = read_current_buffer()
-	local vault = M.vault
-	local entries = {}
+	local entries, seen = {}, {}
 
-	local seen = {}
-
-	for _, line in ipairs(lines) do
+	for _, line in ipairs(buffer.read()) do
 		for raw in line:gmatch("%[%[([^%]]+)%]%]") do
 			local name = raw:match("^[^|]+")
 			if not seen[name] then
 				seen[name] = true
-
-				local matches = vim.fn.globpath(vault, "**/" .. name .. ".md", false, true)
-
-				if #matches > 0 then
-					table.insert(entries, {
-						display = name,
-						path = matches[1],
-					})
-				else
-					table.insert(entries, {
-						display = name .. " (no existe)",
-						path = nil,
-					})
-				end
+				local match = vim.fn.globpath(VAULT, "**/" .. name .. ".md", false, true)[1]
+				table.insert(entries, {
+					display = match and fs.relative(match) or name .. " (no existe)",
+					path = match,
+				})
 			end
 		end
 	end
 
-	if #entries == 0 then
-		vim.notify("No hay links en el archivo")
-		return
+	if vim.tbl_isempty(entries) then
+		return vim.notify("No hay links")
 	end
 
-	local pickers = require("telescope.pickers")
-	local finders = require("telescope.finders")
-	local actions = require("telescope.actions")
-	local action_state = require("telescope.actions.state")
-	local conf = require("telescope.config").values
-
-	pickers
-		.new({}, {
-			prompt_title = "Links",
-			finder = finders.new_table({
-				results = entries,
-				entry_maker = function(entry)
-					return {
-						value = entry,
-						display = entry.display,
-						ordinal = entry.display,
-						path = entry.path,
-					}
-				end,
-			}),
-			sorter = conf.generic_sorter({}),
-			attach_mappings = function(prompt_bufnr)
-				actions.select_default:replace(function()
-					actions.close(prompt_bufnr)
-					local selection = action_state.get_selected_entry()
-					if selection.path then
-						vim.cmd("edit " .. selection.path)
-					else
-						vim.notify("La nota no existe", vim.log.levels.WARN)
-					end
-				end)
-				return true
-			end,
-		})
-		:find()
+	open_picker({
+		title = "Links",
+		results = entries,
+		entry_maker = function(e)
+			return {
+				value = e,
+				display = e.display,
+				ordinal = e.display,
+				path = e.path,
+			}
+		end,
+		attach = function(buf)
+			actions.select_default:replace(function()
+				actions.close(buf)
+				local e = action_state.get_selected_entry()
+				if e.path then
+					vim.cmd("edit " .. vim.fn.fnameescape(e.path))
+				end
+			end)
+			return true
+		end,
+	})
 end
 
--- Tags
-function M.tags()
-	local lines = read_current_buffer()
-	local tags = {}
-
-	local in_yaml = false
-
-	for _, line in ipairs(lines) do
-		if line == "---" then
-			in_yaml = not in_yaml
-		end
-
-		if in_yaml and line:match("^%s*-%s+") then
-			local tag = line:match("^%s*-%s+(%S+)")
-			if tag then
-				table.insert(tags, tag)
-			end
-		end
-
-		for tag in line:gmatch("#([%w-_]+)") do
-			table.insert(tags, tag)
-		end
+-- Search Notes
+function M.Search()
+	local files = fs.find_md(VAULT)
+	if vim.tbl_isempty(files) then
+		return vim.notify("No hay notas")
 	end
 
-	tags = unique(tags)
-
-	if #tags == 0 then
-		vim.notify("No hay tags")
-		return
-	end
-
-	require("telescope.pickers")
-		.new({}, {
-			prompt_title = "Tags",
-			finder = require("telescope.finders").new_table(tags),
-			sorter = require("telescope.config").values.generic_sorter({}),
-		})
-		:find()
+	open_picker({
+		title = "Notes",
+		results = files,
+		entry_maker = function(path)
+			local rel = fs.relative(path)
+			return {
+				value = path,
+				display = rel,
+				ordinal = rel,
+				path = path,
+			}
+		end,
+		attach = function(buf)
+			actions.select_default:replace(function()
+				actions.close(buf)
+				local e = action_state.get_selected_entry()
+				if e and e.path then
+					vim.cmd("edit " .. vim.fn.fnameescape(e.path))
+				end
+			end)
+			return true
+		end,
+	})
 end
 
 -- Keymaps
@@ -286,7 +280,7 @@ function M.setup()
 	map("n", "<leader>ot", M.pick_template, { desc = "Template" })
 	map("n", "<leader>ob", M.backlinks, { desc = "Backlinks" })
 	map("n", "<leader>ol", M.links, { desc = "Links" })
-	map("n", "<leader>og", M.tags, { desc = "Tags" })
+	map("n", "<leader>of", M.Search, { desc = "Search Notes" })
 end
 
 return M
