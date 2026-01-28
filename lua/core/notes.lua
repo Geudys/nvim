@@ -271,16 +271,145 @@ function M.Search()
 	})
 end
 
+-- Tags
+-- Tags (frontmatter YAML)
+function M.tags()
+	-- 1. Buscar archivos que tengan tags en frontmatter
+	local files = vim.fn.systemlist({
+		"rg",
+		"^tags:",
+		VAULT,
+		"--glob",
+		"*.md",
+		"--files-with-matches",
+	})
+
+	if vim.v.shell_error ~= 0 or vim.tbl_isempty(files) then
+		return vim.notify("No hay tags en el vault")
+	end
+
+	-- 2. Extraer tags desde el frontmatter
+	local tags, seen = {}, {}
+
+	for _, file in ipairs(files) do
+		local lines = vim.fn.readfile(file)
+		local in_frontmatter = false
+		local in_tags = false
+
+		for _, line in ipairs(lines) do
+			if line == "---" then
+				in_frontmatter = not in_frontmatter
+				in_tags = false
+			elseif in_frontmatter and line:match("^tags:%s*$") then
+				in_tags = true
+			elseif in_frontmatter and in_tags then
+				local tag = line:match("^%s*-%s*(.+)")
+				if tag then
+					if not seen[tag] then
+						seen[tag] = true
+						table.insert(tags, tag)
+					end
+				else
+					-- Salimos de la lista si ya no es un item
+					in_tags = false
+				end
+			end
+		end
+	end
+
+	if vim.tbl_isempty(tags) then
+		return vim.notify("No se encontraron tags válidos")
+	end
+
+	table.sort(tags)
+
+	-- 3. Picker de tags
+	open_picker({
+		title = "Tags",
+		results = tags,
+		entry_maker = function(tag)
+			return {
+				value = tag,
+				display = tag,
+				ordinal = tag,
+			}
+		end,
+		attach = function(buf)
+			actions.select_default:replace(function()
+				actions.close(buf)
+				local entry = action_state.get_selected_entry()
+				if not entry then
+					return
+				end
+
+				local tag = entry.value
+				local matches = {}
+
+				-- 4. Buscar notas que contengan ese tag
+				for _, file in ipairs(files) do
+					local lines = vim.fn.readfile(file)
+					local in_frontmatter = false
+					local in_tags = false
+
+					for _, line in ipairs(lines) do
+						if line == "---" then
+							in_frontmatter = not in_frontmatter
+							in_tags = false
+						elseif in_frontmatter and line:match("^tags:%s*$") then
+							in_tags = true
+						elseif in_frontmatter and in_tags then
+							if line:match("^%s*-%s*" .. vim.pesc(tag) .. "%s*$") then
+								table.insert(matches, file)
+								break
+							end
+						end
+					end
+				end
+
+				if vim.tbl_isempty(matches) then
+					return vim.notify("No hay notas con el tag " .. tag)
+				end
+
+				open_picker({
+					title = "Notas con tag: " .. tag,
+					results = matches,
+					entry_maker = function(path)
+						local rel = fs.relative(path)
+						return {
+							value = path,
+							display = rel,
+							ordinal = rel,
+							path = path,
+						}
+					end,
+					attach = function(buf2)
+						actions.select_default:replace(function()
+							actions.close(buf2)
+							local e = action_state.get_selected_entry()
+							if e and e.path then
+								vim.cmd("edit " .. vim.fn.fnameescape(e.path))
+							end
+						end)
+						return true
+					end,
+				})
+			end)
+			return true
+		end,
+	})
+end
+
 -- Keymaps
 function M.setup()
 	local map = vim.keymap.set
 
-	map("n", "<leader>ou", M.new_note, { desc = "New Note" })
+	map("n", "<leader>on", M.new_note, { desc = "New Note" })
 	map("n", "<leader>od", M.daily_note, { desc = "Daily Note" })
 	map("n", "<leader>ot", M.pick_template, { desc = "Template" })
 	map("n", "<leader>ob", M.backlinks, { desc = "Backlinks" })
 	map("n", "<leader>ol", M.links, { desc = "Links" })
 	map("n", "<leader>of", M.Search, { desc = "Search Notes" })
+	map("n", "<leader>os", M.tags, { desc = "Tags" })
 end
 
 return M
