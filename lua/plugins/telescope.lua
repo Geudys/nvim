@@ -28,7 +28,7 @@ return {
 			local opts = { noremap = true, silent = true }
 
 			map("n", "<leader><space>", builtin.find_files, { desc = "Buscar archivos", unpack(opts) })
-			map("n", "<leader>tb", builtin.buffers, { desc = "Buffers abiertos", unpack(opts) })
+			map("n", "<leader>bf", builtin.buffers, { desc = "Buffers abiertos", unpack(opts) })
 			map("n", "<leader>tr", builtin.oldfiles, { desc = "Archivos recientes", unpack(opts) })
 			map("n", "<leader>tk", builtin.keymaps, { desc = "Keymaps", unpack(opts) })
 
