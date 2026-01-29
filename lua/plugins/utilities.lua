@@ -14,23 +14,15 @@ return {
 	},
 	{
 		"folke/which-key.nvim",
-		lazy = false,
 		event = "VeryLazy",
-		config = function()
-			vim.o.ttimeout = true
-			vim.o.ttimeoutlen = 101
-			require("which-key").setup({
-				preset = "classic",
-				win = {
-					border = "single",
-					width = 40,
-					height = 25,
-					row = vim.o.lines - 18,
-					col = vim.o.columns - 42,
-				},
-				layout = { align = "right", spacing = 3 },
-			})
-		end,
+		opts = {
+			preset = "helix",
+			delay = 250,
+			win = {
+				border = "rounded",
+				padding = { 0.5, 1 },
+			},
+		},
 	},
 	{
 		"xiyaowong/nvim-transparent",
