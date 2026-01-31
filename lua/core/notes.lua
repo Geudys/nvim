@@ -150,7 +150,7 @@ function M.new_note()
 end
 
 function M.daily_note()
-	local dir = VAULT .. "05 - Daily/Daily 2026/Daily 2026-01/"
+	local dir = VAULT .. "05 - Daily/Daily 2026/Daily 2026-02/"
 	local name = "Daily " .. os.date("%Y-%m-%d") .. ".md"
 	fs.edit_or_create(dir .. name)
 end
