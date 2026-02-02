@@ -21,103 +21,48 @@ return {
 					keymap(mode, lhs, rhs, extend("force", opts, { desc = desc }))
 				end
 
-				map(
-					"n",
-					"gd",
-					"<cmd>Telescope lsp_definitions<CR>",
-					vim.tbl_extend("force", opts, { desc = "LSP: Go to definition" })
-				)
-				map(
-					"n",
-					"gD",
-					vim.lsp.buf.declaration,
-					vim.tbl_extend("force", opts, { desc = "LSP: Go to declaration" })
-				)
-				map(
-					"n",
-					"gi",
-					"<cmd>Telescope lsp_implementations<CR>",
-					vim.tbl_extend("force", opts, { desc = "LSP: Go to implementation" })
-				)
-				map(
-					"n",
-					"gt",
-					"<cmd>Telescope lsp_type_definitions<CR>",
-					vim.tbl_extend("force", opts, { desc = "LSP: Go to type definition" })
-				)
-				map(
-					"n",
-					"gr",
-					"<cmd>Telescope lsp_references<CR>",
-					vim.tbl_extend("force", opts, { desc = "LSP: Show references" })
-				)
+				map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "LSP: Go to definition")
+				map("n", "gD", vim.lsp.buf.declaration, "LSP: Go to declaration")
+				map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "LSP: Go to implementation")
+				map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "LSP: Go to type definition")
+				map("n", "gr", "<cmd>Telescope lsp_references<CR>", "LSP: Show references")
 
-				map("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "LSP: Hover documentation" }))
-				map(
-					"n",
-					"gK",
-					vim.lsp.buf.signature_help,
-					vim.tbl_extend("force", opts, { desc = "LSP: Signature help" })
-				)
-				map(
-					"i",
-					"<C-k>",
-					vim.lsp.buf.signature_help,
-					vim.tbl_extend("force", opts, { desc = "LSP: Signature help" })
-				)
+				map("n", "K", vim.lsp.buf.hover, "LSP: Hover documentation")
+				map("n", "gK", vim.lsp.buf.signature_help, "LSP: Signature help")
+				map("i", "<C-k>", vim.lsp.buf.signature_help, "LSP: Signature help")
 
-				map(
-					{ "n", "v" },
-					"<leader>ca",
-					vim.lsp.buf.code_action,
-					vim.tbl_extend("force", opts, { desc = "LSP: Code action" })
-				)
+				map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "LSP: Code action")
+				map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename symbol")
 
-				map(
-					"n",
-					"<leader>dd",
-					vim.diagnostic.open_float,
-					vim.tbl_extend("force", opts, { desc = "Diagnostics: Show line diagnostics" })
-				)
-				map(
-					"n",
-					"<leader>db",
-					"<cmd>Telescope diagnostics bufnr=0<CR>",
-					vim.tbl_extend("force", opts, { desc = "Diagnostics: Show buffer diagnostics" })
-				)
-				map(
-					"n",
-					"<leader>dw",
-					"<cmd>Telescope diagnostics<CR>",
-					vim.tbl_extend("force", opts, { desc = "Diagnostics: Show workspace diagnostics" })
-				)
+				map("n", "<leader>dd", vim.diagnostic.open_float, "Diagnostics: Line diagnostics")
+				map("n", "<leader>db", "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics: Buffer diagnostics")
+				map("n", "<leader>dw", "<cmd>Telescope diagnostics<CR>", "Diagnostics: Workspace diagnostics")
 
 				map("n", "[d", function()
 					vim.diagnostic.jump({ count = -1, float = true })
-				end, vim.tbl_extend("force", opts, { desc = "Diagnostics: Previous diagnostic" }))
+				end, "Diagnostics: Previous diagnostic")
 
 				map("n", "]d", function()
 					vim.diagnostic.jump({ count = 1, float = true })
-				end, vim.tbl_extend("force", opts, { desc = "Diagnostics: Next diagnostic" }))
+				end, "Diagnostics: Next diagnostic")
 
 				map("n", "[e", function()
 					vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true })
-				end, vim.tbl_extend("force", opts, { desc = "Diagnostics: Previous error" }))
+				end, "Diagnostics: Previous error")
 
 				map("n", "]e", function()
 					vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
-				end, vim.tbl_extend("force", opts, { desc = "Diagnostics: Next error" }))
+				end, "Diagnostics: Next error")
 
 				map("n", "[w", function()
 					vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN, float = true })
-				end, vim.tbl_extend("force", opts, { desc = "Diagnostics: Previous warning" }))
+				end, "Diagnostics: Previous warning")
 
 				map("n", "]w", function()
 					vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN, float = true })
-				end, vim.tbl_extend("force", opts, { desc = "Diagnostics: Next warning" }))
+				end, "Diagnostics: Next warning")
 			end,
 		})
-
 		vim.diagnostic.config({
 			virtual_text = {
 				spacing = 4,
