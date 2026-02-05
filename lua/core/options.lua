@@ -32,8 +32,6 @@ vim.opt.isfname:append("@-@")
 vim.opt.encoding = "utf-8"
 vim.opt.mouse = "a"
 
-pcall(vim.cmd.colorscheme, "night-owl")
-
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = true
