@@ -115,4 +115,12 @@ return {
 			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { desc = "TODO comments" }),
 		},
 	},
+	{
+		"MagicDuck/grug-far.nvim",
+		config = function()
+			require("grug-far").setup({
+				vim.keymap.set("n", "<leader>R", "<cmd>GrugFar<CR>", { desc = "Grug Far" }),
+			})
+		end,
+	},
 }
