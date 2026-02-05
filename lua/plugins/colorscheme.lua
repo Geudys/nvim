@@ -1,5 +1,18 @@
 return {
 	{
+		"vague-theme/vague.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function() end,
+	},
+
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		config = function() end,
+	},
+
+	{
 		"oxfist/night-owl.nvim",
 		lazy = false,
 		priority = 1000,
@@ -12,7 +25,7 @@ return {
 				undercurl = true,
 				transparent_background = true,
 			})
-			vim.cmd.colorscheme("night-owl")
+			vim.cmd("colorscheme night-owl")
 		end,
 	},
 }
