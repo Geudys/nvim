@@ -28,6 +28,8 @@ return {
 					"vimdoc",
 					"c",
 					"typst",
+					"regex",
+					"bash",
 				},
 				auto_install = true,
 				incremental_selection = {
