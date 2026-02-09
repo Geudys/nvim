@@ -23,6 +23,8 @@ return {
 	},
 	{
 		"echasnovski/mini.surround",
+		lazy = true,
+		event = "VeryLazy",
 		opts = {
 			custom_surroundings = nil,
 			highlight_duration = 500,

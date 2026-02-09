@@ -1,13 +1,14 @@
 return {
 	{
 		"vague-theme/vague.nvim",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function() end,
 	},
 
 	{
 		"rose-pine/neovim",
+		lazy = true,
 		name = "rose-pine",
 		config = function() end,
 	},

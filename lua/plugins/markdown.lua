@@ -1,6 +1,8 @@
 return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
+		event = "VeryLazy",
+		ft = "markdown",
 		opts = {
 			render_modes = { "n", "v", "i", "c" },
 
