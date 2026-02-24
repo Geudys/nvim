@@ -11,78 +11,65 @@ return {
 	},
 	keys = function()
 		local map = vim.keymap.set
-		local opts = { silent = true }
 
-		map(
-			"n",
-			"<leader>xx",
-			"<cmd>Trouble toggle<cr>",
-			vim.tbl_extend("force", opts, {
-				desc = "Trouble toggle",
-			})
-		)
+		map("n", "<leader>xx", "<cmd>Trouble toggle<cr>", {
+			desc = "Trouble toggle",
+			silent = true,
+		})
 
-		map(
-			"n",
-			"<leader>xd",
-			"<cmd>Trouble diagnostics toggle<cr>",
-			vim.tbl_extend("force", opts, {
-				desc = "Diagnostics (workspace)",
-			})
-		)
+		map("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", {
+			desc = "Diagnostics (buffer)",
+			silent = true,
+		})
 
-		map(
-			"n",
-			"<leader>xb",
-			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			vim.tbl_extend("force", opts, {
-				desc = "Diagnostics (buffer)",
-			})
-		)
+		map("n", "<leader>xD", "<cmd>Trouble diagnostics toggle<cr>", {
+			desc = "Diagnostics (workspace)",
+			silent = true,
+		})
 
-		map(
-			"n",
-			"<leader>xs",
-			"<cmd>Trouble symbols win.position=left<cr>",
-			vim.tbl_extend("force", opts, {
-				desc = "Symbols / Outline",
-			})
-		)
+		map("n", "<leader>xs", "<cmd>Trouble symbols win.position=left<cr>", {
+			desc = "Symbols / Outline (buffer)",
+			silent = true,
+		})
 
-		map(
-			"n",
-			"<leader>xr",
-			"<cmd>Trouble lsp_references toggle<cr>",
-			vim.tbl_extend("force", opts, {
-				desc = "LSP references",
-			})
-		)
+		map("n", "<leader>xr", "<cmd>Trouble lsp_references toggle filter.buf=0<cr>", {
+			desc = "LSP references (buffer)",
+			silent = true,
+		})
 
-		map(
-			"n",
-			"<leader>xd",
-			"<cmd>Trouble lsp_definitions toggle<cr>",
-			vim.tbl_extend("force", opts, {
-				desc = "LSP definitions",
-			})
-		)
+		map("n", "<leader>xR", "<cmd>Trouble lsp_references toggle<cr>", {
+			desc = "LSP references (workspace)",
+			silent = true,
+		})
 
-		map(
-			"n",
-			"<leader>xi",
-			"<cmd>Trouble lsp_implementations toggle<cr>",
-			vim.tbl_extend("force", opts, {
-				desc = "LSP implementations",
-			})
-		)
+		map("n", "<leader>xd", "<cmd>Trouble lsp_definitions toggle filter.buf=0<cr>", {
+			desc = "LSP definitions (buffer)",
+			silent = true,
+		})
 
-		map(
-			"n",
-			"<leader>xt",
-			"<cmd>Trouble lsp_type_definitions toggle<cr>",
-			vim.tbl_extend("force", opts, {
-				desc = "LSP type definitions",
-			})
-		)
+		map("n", "<leader>xD", "<cmd>Trouble lsp_definitions toggle<cr>", {
+			desc = "LSP definitions (workspace)",
+			silent = true,
+		})
+
+		map("n", "<leader>xi", "<cmd>Trouble lsp_implementations toggle filter.buf=0<cr>", {
+			desc = "LSP implementations (buffer)",
+			silent = true,
+		})
+
+		map("n", "<leader>xI", "<cmd>Trouble lsp_implementations toggle<cr>", {
+			desc = "LSP implementations (workspace)",
+			silent = true,
+		})
+
+		map("n", "<leader>xt", "<cmd>Trouble lsp_type_definitions toggle filter.buf=0<cr>", {
+			desc = "LSP type definitions (buffer)",
+			silent = true,
+		})
+
+		map("n", "<leader>xT", "<cmd>Trouble lsp_type_definitions toggle<cr>", {
+			desc = "LSP type definitions (workspace)",
+			silent = true,
+		})
 	end,
 }
