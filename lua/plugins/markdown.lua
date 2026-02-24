@@ -40,7 +40,7 @@ return {
 		ft = "markdown",
 		keys = {
 			{
-				"<leader>op",
+				"<leader>oP",
 				ft = "markdown",
 				"<cmd>MarkdownPreviewToggle<cr>",
 				desc = "Markdown Preview",
@@ -48,6 +48,12 @@ return {
 		},
 		init = function()
 			vim.g.mkdp_page_title = "${name}"
+		end,
+	},
+	{
+		"tjdevries/present.nvim",
+		config = function()
+			vim.keymap.set("n", "<leader>op", "<cmd>PresentStart<CR>", { desc = "Present Start" })
 		end,
 	},
 }
