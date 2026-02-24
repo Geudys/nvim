@@ -42,12 +42,12 @@ return {
 			silent = true,
 		})
 
-		map("n", "<leader>xd", "<cmd>Trouble lsp_definitions toggle filter.buf=0<cr>", {
+		map("n", "<leader>xl", "<cmd>Trouble lsp_definitions toggle filter.buf=0<cr>", {
 			desc = "LSP definitions (buffer)",
 			silent = true,
 		})
 
-		map("n", "<leader>xD", "<cmd>Trouble lsp_definitions toggle<cr>", {
+		map("n", "<leader>xL", "<cmd>Trouble lsp_definitions toggle<cr>", {
 			desc = "LSP definitions (workspace)",
 			silent = true,
 		})
