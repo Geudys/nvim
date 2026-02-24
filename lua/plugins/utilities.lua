@@ -66,7 +66,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local notify = require("notify")
-			notify.setup({ background_colour = "#000001", timeout = 500 })
+			notify.setup({ background_colour = "#000001", timeout = 200 })
 			vim.notify = notify
 		end,
 	},
@@ -126,8 +126,21 @@ return {
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
+		event = "BufReadPre",
 		config = function()
-			require("colorizer").setup()
+			require("colorizer").setup({
+				"*",
+			}, {
+				RGB = true,
+				RRGGBB = true,
+				names = true,
+				RRGGBBAA = true,
+				rgb_fn = true,
+				hsl_fn = true,
+				css = true,
+				css_fn = true,
+				mode = "background",
+			})
 		end,
 	},
 }
