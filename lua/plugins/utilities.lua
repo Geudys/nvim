@@ -113,6 +113,7 @@ return {
 				REFACTOR = { icon = "󰑓", color = "hint" },
 			},
 			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { desc = "TODO comments" }),
+			vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble win.position=left<CR>", { desc = "TODO comments" }),
 		},
 	},
 	{
