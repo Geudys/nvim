@@ -149,12 +149,6 @@ function M.new_note()
 	fs.edit_or_create(VAULT .. name)
 end
 
-function M.daily_note()
-	local dir = VAULT .. "05 - Daily/Daily 2026/Daily 2026-02/"
-	local name = "Daily " .. os.date("%Y-%m-%d") .. ".md"
-	fs.edit_or_create(dir .. name)
-end
-
 -- Backlinks
 function M.backlinks()
 	local note = buffer.current_note()
@@ -404,7 +398,6 @@ function M.setup()
 	local map = vim.keymap.set
 
 	map("n", "<leader>on", M.new_note, { desc = "New Note" })
-	map("n", "<leader>od", M.daily_note, { desc = "Daily Note" })
 	map("n", "<leader>ot", M.pick_template, { desc = "Template" })
 	map("n", "<leader>ob", M.backlinks, { desc = "Backlinks" })
 	map("n", "<leader>ol", M.links, { desc = "Links" })
