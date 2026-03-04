@@ -31,9 +31,6 @@ return {
 				map("n", "gK", vim.lsp.buf.signature_help, "LSP: Signature help")
 				map("i", "<C-k>", vim.lsp.buf.signature_help, "LSP: Signature help")
 
-				map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "LSP: Code action")
-				map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename symbol")
-
 				map("n", "<leader>dd", vim.diagnostic.open_float, "Diagnostics: Line diagnostics")
 				map("n", "<leader>db", "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics: Buffer diagnostics")
 				map("n", "<leader>dw", "<cmd>Telescope diagnostics<CR>", "Diagnostics: Workspace diagnostics")
