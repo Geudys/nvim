@@ -14,7 +14,7 @@ return {
 	},
 	{
 		"folke/which-key.nvim",
-		event = "VeryLazy",
+		event = false,
 		opts = {
 			preset = "helix",
 			delay = 250,
