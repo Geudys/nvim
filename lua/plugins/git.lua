@@ -9,6 +9,8 @@ return {
 			gs.setup()
 			vim.keymap.set("n", "<leader>gj", gs.next_hunk, { desc = "Siguiente cambio (hunk)" })
 			vim.keymap.set("n", "<leader>gk", gs.prev_hunk, { desc = "Cambio (hunk) anterior" })
+			vim.keymap.set("n", "]j", gs.next_hunk, { desc = "Siguiente cambio (hunk)" })
+			vim.keymap.set("n", "[k", gs.prev_hunk, { desc = "Cambio (hunk) anterior" })
 			vim.keymap.set("n", "<leader>gs", gs.stage_hunk, { desc = "Guardar cambio (hunk)" })
 			vim.keymap.set("n", "<leader>gu", gs.undo_stage_hunk, { desc = "Deshacer cambio (hunk)" })
 			vim.keymap.set("n", "<leader>gr", gs.reset_hunk, { desc = "Reiniciar cambio (hunk)" })
