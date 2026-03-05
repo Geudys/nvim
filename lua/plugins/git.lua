@@ -21,35 +21,12 @@ return {
 			end, { desc = "Blame línea actual" })
 		end,
 	},
-
-	{
-		"f-person/git-blame.nvim",
-		lazy = true,
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = { "GitBlameToggle" },
-		keys = {
-			{ "<leader>gt", "<cmd>GitBlameToggle<CR>", desc = "Alternar Git Blame" },
-		},
-		init = function()
-			vim.g.gitblame_enabled = 0
-		end,
-	},
-
 	{
 		"kdheepak/lazygit.nvim",
 		event = "VeryLazy",
 		cmd = "LazyGit",
 		keys = {
 			{ "<leader>gl", "<cmd>LazyGit<CR>", desc = "Abrir LazyGit" },
-		},
-	},
-	{
-		"sindrets/diffview.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-		keys = {
-			{ "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Abrir Diffview" },
-			{ "<leader>go", "<cmd>DiffviewClose<CR>", desc = "Cerrar Diffview" },
 		},
 	},
 }
