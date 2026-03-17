@@ -38,7 +38,7 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "markdown" },
+	pattern = { "markdown", "typst" },
 	callback = function()
 		vim.opt_local.wrap = true
 		vim.opt_local.linebreak = true
