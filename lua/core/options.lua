@@ -9,7 +9,7 @@ vim.opt.spelllang = "es,en"
 vim.opt.breakindent = true
 vim.opt.scrolloff = 20
 vim.opt.sidescrolloff = 20
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
