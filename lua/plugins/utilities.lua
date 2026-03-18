@@ -12,42 +12,42 @@ return {
 		},
 	},
 
-	{
-		"xiyaowong/nvim-transparent",
-		lazy = false,
-		event = "VeryLazy",
-		config = function()
-			require("transparent").setup({
-				enable = true,
-				extra_groups = {
-					"Alpha",
-					"NormalFloat",
-					"NvimTreeNormal",
-					"BufferLineTabClose",
-					"TelescopeBorder",
-					"TelescopePrompt",
-					"TelescopeResults",
-					"TelescopeNormal",
-					"LualineNormal",
-					"Lualine",
-					"lualine",
-					"Barbecue",
-					"WhichKeyFloat",
-					"Pmenu",
-					"NotifyBackground",
-					"NoicePopup",
-					"NeoTreeNormal",
-					"DashboardHeader",
-					"DashboardCenter",
-					"DashboardFooter",
-					"Bufferline",
-					"NormalFloat",
-					"FloatBorder",
-				},
-			})
-			vim.cmd("TransparentEnable")
-		end,
-	},
+	-- {
+	-- 	"xiyaowong/nvim-transparent",
+	-- 	lazy = false,
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("transparent").setup({
+	-- 			enable = true,
+	-- 			extra_groups = {
+	-- 				"Alpha",
+	-- 				"NormalFloat",
+	-- 				"NvimTreeNormal",
+	-- 				"BufferLineTabClose",
+	-- 				"TelescopeBorder",
+	-- 				"TelescopePrompt",
+	-- 				"TelescopeResults",
+	-- 				"TelescopeNormal",
+	-- 				"LualineNormal",
+	-- 				"Lualine",
+	-- 				"lualine",
+	-- 				"Barbecue",
+	-- 				"WhichKeyFloat",
+	-- 				"Pmenu",
+	-- 				"NotifyBackground",
+	-- 				"NoicePopup",
+	-- 				"NeoTreeNormal",
+	-- 				"DashboardHeader",
+	-- 				"DashboardCenter",
+	-- 				"DashboardFooter",
+	-- 				"Bufferline",
+	-- 				"NormalFloat",
+	-- 				"FloatBorder",
+	-- 			},
+	-- 		})
+	-- 		vim.cmd("TransparentEnable")
+	-- 	end,
+	-- },
 
 	{
 		"rcarriga/nvim-notify",
