@@ -33,7 +33,7 @@ return {
 					yaml = { "prettier" },
 					yml = { "prettier" },
 					python = { "black", "isort" },
-					typst = { "typstfmt" },
+					typst = { "typstyle" },
 				},
 				formatters = {
 					prettier = {
