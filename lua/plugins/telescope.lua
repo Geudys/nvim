@@ -68,10 +68,8 @@ return {
 				{ desc = "LSP símbolos del workspace", unpack(opts) }
 			)
 
-			map("n", "<leader>tgc", builtin.git_commits, { desc = "Git commits", unpack(opts) })
-			map("n", "<leader>tgf", builtin.git_files, { desc = "Git archivos", unpack(opts) })
-			map("n", "<leader>tgb", builtin.git_branches, { desc = "Git ramas", unpack(opts) })
-			map("n", "<leader>tgs", builtin.git_status, { desc = "Git estado", unpack(opts) })
+			map("n", "<leader>gf", builtin.git_status, { desc = "Git estado", unpack(opts) })
+			map("n", "<leader>gF", builtin.git_branches, { desc = "Git ramas", unpack(opts) })
 		end,
 	},
 }
