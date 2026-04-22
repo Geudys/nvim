@@ -9,6 +9,7 @@ return {
 			treesitter.setup({
 				highlight = {
 					enable = true,
+					additional_vim_regex_highlighting = false,
 				},
 				indent = { enable = true },
 				ensure_installed = {
@@ -29,7 +30,14 @@ return {
 					"c",
 					"typst",
 					"regex",
-					"bash",
+					"fish",
+					"go",
+					"rust",
+					"python",
+					"toml",
+					"diff",
+					"gitcommit",
+					"query",
 				},
 				auto_install = true,
 				incremental_selection = {
@@ -41,9 +49,53 @@ return {
 						node_decremental = "<bs>",
 					},
 				},
+				refactor = {
+					highlight_current_scope = { enable = true },
+					highlight_global_variables = { enable = true },
+				},
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+							["aa"] = "@parameter.outer",
+							["ia"] = "@parameter.inner",
+						},
+					},
+					swap = {
+						enable = true,
+						swap_next = { ["<leader>sp"] = "@parameter.inner" },
+						swap_previous = { ["<leader>sP"] = "@parameter.inner" },
+					},
+					move = {
+						enable = true,
+						set_jumps = true,
+						goto_next_start = {
+							["]f"] = "@function.outer",
+							["]c"] = "@class.outer",
+						},
+						goto_next_end = {
+							["]F"] = "@function.outer",
+							["]C"] = "@class.outer",
+						},
+						goto_previous_start = {
+							["[f"] = "@function.outer",
+							["[c"] = "@class.outer",
+						},
+						goto_previous_end = {
+							["[F"] = "@function.outer",
+							["[C"] = "@class.outer",
+						},
+					},
+				},
 			})
 
 			vim.treesitter.language.register("bash", "fish")
 		end,
 	},
 }
+
