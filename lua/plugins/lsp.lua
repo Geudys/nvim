@@ -31,9 +31,8 @@ return {
 				map("n", "gK", vim.lsp.buf.signature_help, "LSP: Signature help")
 				map("i", "<C-k>", vim.lsp.buf.signature_help, "LSP: Signature help")
 
-				map("n", "<leader>dd", vim.diagnostic.open_float, "Diagnostics: Line diagnostics")
-				map("n", "<leader>db", "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics: Buffer diagnostics")
-				map("n", "<leader>dw", "<cmd>Telescope diagnostics<CR>", "Diagnostics: Workspace diagnostics")
+				map("n", "<leader>d", vim.diagnostic.open_float, "Diagnostics: Line diagnostics")
+				map("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics: Buffer diagnostics")
 
 				map("n", "[d", function()
 					vim.diagnostic.jump({ count = -1, float = true })
