@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "j-hui/fidget.nvim", opts = {} },
+		{ "j-hui/fidget.nvim",                   opts = {} },
 	},
 	config = function()
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -32,7 +32,8 @@ return {
 				map("i", "<C-k>", vim.lsp.buf.signature_help, "LSP: Signature help")
 
 				map("n", "<leader>d", vim.diagnostic.open_float, "Diagnostics: Line diagnostics")
-				map("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics: Buffer diagnostics")
+				map("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>",
+					"Diagnostics: Buffer diagnostics")
 
 				map("n", "[d", function()
 					vim.diagnostic.jump({ count = -1, float = true })
@@ -176,5 +177,12 @@ return {
 				},
 			},
 		})
+
+		vim.lsp.config("nil", {
+			capabilities = capabilities,
+		})
+		local servers = { "emmet_ls", "markdown_oxide", "lua_ls", "pyright", "eslint", "rust_analyzer", "ts_ls",
+			"nil" }
+		vim.lsp.enable(servers)
 	end,
 }

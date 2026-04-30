@@ -1,7 +1,7 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		lazy = true,
+		lazy = false,
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
@@ -34,6 +34,7 @@ return {
 					yml = { "prettier" },
 					python = { "black", "isort" },
 					typst = { "typstyle" },
+					nix = { "nixfmt" },
 				},
 				formatters = {
 					prettier = {

@@ -37,6 +37,7 @@ return {
 					"fish_lsp",
 					"markdown_oxide",
 					"tinymist",
+					"nil_ls",
 				},
 			})
 		end,
