@@ -178,11 +178,11 @@ return {
 			},
 		})
 
-		vim.lsp.config("nil", {
+		vim.lsp.config("nil_ls", {
 			capabilities = capabilities,
 		})
 		local servers = { "emmet_ls", "markdown_oxide", "lua_ls", "pyright", "eslint", "rust_analyzer", "ts_ls",
-			"nil" }
+			"nil_ls" }
 		vim.lsp.enable(servers)
 	end,
 }
