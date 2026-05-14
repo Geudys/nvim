@@ -41,13 +41,10 @@ return {
 						prepend_args = {
 							"--use-tabs",
 							"--tab-width=8",
-
-							"--single-quote",
-							"--trailing-comma=es5",
-							"--semi",
-							"--bracket-spacing",
-							"--arrow-parens=avoid",
 						},
+					},
+					stylua = {
+						prepend_args = { "--indent-type", "Tabs" },
 					},
 				},
 				default_format_opts = { lsp_fallback = true },
