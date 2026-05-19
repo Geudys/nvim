@@ -13,9 +13,9 @@ vim.opt.cursorline = false
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.opt.tabstop = 8
-vim.opt.shiftwidth = 8
-vim.opt.softtabstop = 8
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 vim.opt.expandtab = false
 vim.opt.smartindent = true
 
@@ -43,5 +43,15 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.opt_local.wrap = true
 		vim.opt_local.linebreak = true
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "nix",
+	callback = function()
+		vim.opt_local.tabstop = 2
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.softtabstop = 2
+		vim.opt_local.expandtab = true
 	end,
 })
