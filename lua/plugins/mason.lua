@@ -23,7 +23,6 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"emmet_ls",
 					"lua_ls",
 					"ts_ls",
 					"vimls",
@@ -33,6 +32,7 @@ return {
 					"tinymist",
 					"nil_ls",
 				},
+				automatic_enable = true,
 			})
 		end,
 	},
