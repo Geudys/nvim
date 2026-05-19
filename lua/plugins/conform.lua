@@ -18,29 +18,16 @@ return {
 			require("conform").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					go = { "gofmt" },
-					rust = { "rustfmt" },
-					html = { "prettier" },
-					css = { "prettier" },
-					scss = { "prettier" },
 					javascript = { "prettier" },
-					typescript = { "prettier" },
-					javascriptreact = { "prettier" },
-					typescriptreact = { "prettier" },
 					markdown = { "prettier" },
-					json = { "prettier" },
-					jsonc = { "prettier" },
-					yaml = { "prettier" },
-					yml = { "prettier" },
-					python = { "black", "isort" },
 					typst = { "typstyle" },
-					nix = { "nixfmt" },
+					nix = { "alejandra" },
 				},
 				formatters = {
 					prettier = {
 						prepend_args = {
 							"--use-tabs",
-							"--tab-width=8",
+							"--tab-width=4",
 						},
 					},
 					stylua = {
