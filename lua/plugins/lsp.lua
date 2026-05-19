@@ -31,32 +31,31 @@ return {
 			MiniSnippets.start_lsp_server({ match = false })
 
 			-- Tab / S-Tab mappings for completion and snippets
-			vim.keymap.set('i', '<Tab>', function()
+			vim.keymap.set("i", "<Tab>", function()
 				if vim.fn.pumvisible() == 1 then
-					return '<C-n>'
+					return "<C-n>"
 				end
-				local can_expand = #MiniSnippets.expand({ insert = false }) > 0
-				if can_expand then
-					vim.schedule(MiniSnippets.expand)
-					return ''
-				end
-				if MiniSnippets.session.get() ~= nil then
-					MiniSnippets.session.jump('next')
-					return ''
-				end
-				return '<Tab>'
-			end, { expr = true, desc = 'Complete / Expand snippet' })
 
-			vim.keymap.set('i', '<S-Tab>', function()
-				if vim.fn.pumvisible() == 1 then
-					return '<C-p>'
-				end
 				if MiniSnippets.session.get() ~= nil then
-					MiniSnippets.session.jump('prev')
-					return ''
+					MiniSnippets.session.jump("next")
+					return ""
 				end
-				return '<S-Tab>'
-			end, { expr = true, desc = 'Prev completion / Prev snippet tabstop' })
+
+				return "<Tab>"
+			end, { expr = true })
+
+			vim.keymap.set("i", "<S-Tab>", function()
+				if vim.fn.pumvisible() == 1 then
+					return "<C-p>"
+				end
+
+				if MiniSnippets.session.get() ~= nil then
+					MiniSnippets.session.jump("prev")
+					return ""
+				end
+
+				return "<S-Tab>"
+			end, { expr = true })
 
 			-- Native LSP capabilities via mini.completion
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
