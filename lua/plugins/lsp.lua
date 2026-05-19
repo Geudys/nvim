@@ -1,188 +1,199 @@
 return {
-	"neovim/nvim-lspconfig",
-	lazy = false,
-	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
-		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "j-hui/fidget.nvim",                   opts = {} },
-	},
-	config = function()
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		dependencies = {
+			"nvim-mini/mini.completion",
+			"nvim-mini/mini.cmdline",
+			{ "nvim-mini/mini.snippets", dependencies = { "rafamadriz/friendly-snippets" } },
+			"j-hui/fidget.nvim",
+		},
+		config = function()
+			-- mini.cmdline
+			require("mini.cmdline").setup({
+				autocorrect = { enable = false },
+			})
 
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
-			callback = function(ev)
-				local opts = { buffer = ev.buf, silent = true }
-				local keymap = vim.keymap.set
-				local extend = vim.tbl_extend
+			-- mini.completion
+			require("mini.completion").setup({
+				lsp_completion = {
+					auto_setup = true,
+				},
+			})
 
-				local function map(mode, lhs, rhs, desc)
-					keymap(mode, lhs, rhs, extend("force", opts, { desc = desc }))
+			-- mini.snippets
+			local MiniSnippets = require("mini.snippets")
+			MiniSnippets.setup({
+				snippets = {
+					MiniSnippets.gen_loader.from_lang(),
+				},
+			})
+			MiniSnippets.start_lsp_server({ match = false })
+
+			-- Tab / S-Tab mappings for completion and snippets
+			vim.keymap.set('i', '<Tab>', function()
+				if vim.fn.pumvisible() == 1 then
+					return '<C-n>'
 				end
+				local can_expand = #MiniSnippets.expand({ insert = false }) > 0
+				if can_expand then
+					vim.schedule(MiniSnippets.expand)
+					return ''
+				end
+				if MiniSnippets.session.get() ~= nil then
+					MiniSnippets.session.jump('next')
+					return ''
+				end
+				return '<Tab>'
+			end, { expr = true, desc = 'Complete / Expand snippet' })
 
-				map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "LSP: Go to definition")
-				map("n", "gD", vim.lsp.buf.declaration, "LSP: Go to declaration")
-				map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "LSP: Go to implementation")
-				map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "LSP: Go to type definition")
-				map("n", "gr", "<cmd>Telescope lsp_references<CR>", "LSP: Show references")
+			vim.keymap.set('i', '<S-Tab>', function()
+				if vim.fn.pumvisible() == 1 then
+					return '<C-p>'
+				end
+				if MiniSnippets.session.get() ~= nil then
+					MiniSnippets.session.jump('prev')
+					return ''
+				end
+				return '<S-Tab>'
+			end, { expr = true, desc = 'Prev completion / Prev snippet tabstop' })
 
-				map("n", "K", vim.lsp.buf.hover, "LSP: Hover documentation")
-				map("n", "gK", vim.lsp.buf.signature_help, "LSP: Signature help")
-				map("i", "<C-k>", vim.lsp.buf.signature_help, "LSP: Signature help")
+			-- Native LSP capabilities via mini.completion
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("mini.completion").get_lsp_capabilities())
 
-				map("n", "<leader>d", vim.diagnostic.open_float, "Diagnostics: Line diagnostics")
-				map("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>",
-					"Diagnostics: Buffer diagnostics")
+			vim.lsp.config("*", { capabilities = capabilities })
 
-				map("n", "[d", function()
-					vim.diagnostic.jump({ count = -1, float = true })
-				end, "Diagnostics: Previous diagnostic")
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+				callback = function(ev)
+					local opts = { buffer = ev.buf, silent = true }
+					local keymap = vim.keymap.set
+					local extend = vim.tbl_extend
 
-				map("n", "]d", function()
-					vim.diagnostic.jump({ count = 1, float = true })
-				end, "Diagnostics: Next diagnostic")
+					local function map(mode, lhs, rhs, desc)
+						keymap(mode, lhs, rhs, extend("force", opts, { desc = desc }))
+					end
 
-				map("n", "[e", function()
-					vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true })
-				end, "Diagnostics: Previous error")
+					map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", "LSP: Go to definition")
+					map("n", "gD", vim.lsp.buf.declaration, "LSP: Go to declaration")
+					map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", "LSP: Go to implementation")
+					map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "LSP: Go to type definition")
+					map("n", "gr", "<cmd>Telescope lsp_references<CR>", "LSP: Show references")
 
-				map("n", "]e", function()
-					vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
-				end, "Diagnostics: Next error")
+					map("n", "K", vim.lsp.buf.hover, "LSP: Hover documentation")
+					map("n", "gK", vim.lsp.buf.signature_help, "LSP: Signature help")
+					map("i", "<C-k>", vim.lsp.buf.signature_help, "LSP: Signature help")
 
-				map("n", "[w", function()
-					vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN, float = true })
-				end, "Diagnostics: Previous warning")
+					map("n", "<leader>d", vim.diagnostic.open_float, "Diagnostics: Line diagnostics")
+					map("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics: Buffer diagnostics")
 
-				map("n", "]w", function()
-					vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN, float = true })
-				end, "Diagnostics: Next warning")
-			end,
-		})
-		vim.diagnostic.config({
-			virtual_text = {
-				spacing = 4,
-				prefix = "●",
-				severity = { min = vim.diagnostic.severity.HINT },
-			},
-			signs = {
-				text = {
-					[vim.diagnostic.severity.ERROR] = " ",
-					[vim.diagnostic.severity.WARN] = " ",
-					[vim.diagnostic.severity.HINT] = "󰠠 ",
-					[vim.diagnostic.severity.INFO] = " ",
+					map("n", "[d", function()
+						vim.diagnostic.jump({ count = -1, float = true })
+					end, "Diagnostics: Previous diagnostic")
+
+					map("n", "]d", function()
+						vim.diagnostic.jump({ count = 1, float = true })
+					end, "Diagnostics: Next diagnostic")
+
+					map("n", "[e", function()
+						vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true })
+					end, "Diagnostics: Previous error")
+
+					map("n", "]e", function()
+						vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
+					end, "Diagnostics: Next error")
+
+					map("n", "[w", function()
+						vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN, float = true })
+					end, "Diagnostics: Previous warning")
+
+					map("n", "]w", function()
+						vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN, float = true })
+					end, "Diagnostics: Next warning")
+				end,
+			})
+
+			vim.diagnostic.config({
+				virtual_text = {
+					spacing = 4,
+					prefix = "●",
+					severity = { min = vim.diagnostic.severity.HINT },
 				},
-			},
-			float = {
-				source = true,
-				border = "rounded",
-			},
-			update_in_insert = false,
-			severity_sort = true,
-			underline = true,
-		})
-
-		vim.lsp.config("emmet_ls", {
-			capabilities = capabilities,
-			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte", "vue" },
-		})
-
-		vim.lsp.config("markdown_oxide", {
-			capabilities = capabilities,
-			filetypes = { "markdown", "markdown_inline" },
-		})
-
-		vim.lsp.config("lua_ls", {
-			capabilities = capabilities,
-			settings = {
-				Lua = {
-					runtime = { version = "LuaJIT" },
-					diagnostics = { globals = { "vim" } },
-					completion = { callSnippet = "Replace" },
-					workspace = {
-						checkThirdParty = false,
-						library = { vim.env.VIMRUNTIME },
-					},
-					telemetry = { enable = false },
-				},
-			},
-		})
-
-		vim.lsp.config("pyright", {
-			capabilities = capabilities,
-			settings = {
-				python = {
-					analysis = {
-						typeCheckingMode = "basic",
-						autoSearchPaths = true,
-						useLibraryCodeForTypes = true,
-						diagnosticMode = "workspace",
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.WARN] = " ",
+						[vim.diagnostic.severity.HINT] = "󰠠 ",
+						[vim.diagnostic.severity.INFO] = " ",
 					},
 				},
-			},
-		})
+				float = {
+					source = true,
+					border = "rounded",
+				},
+				update_in_insert = false,
+				severity_sort = true,
+				underline = true,
+			})
 
-		vim.lsp.config("eslint", {
-			capabilities = capabilities,
-			on_attach = function(_, bufnr)
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					buffer = bufnr,
-					command = "EslintFixAll",
-				})
-			end,
-		})
-
-		vim.lsp.config("rust_analyzer", {
-			capabilities = capabilities,
-			settings = {
-				["rust-analyzer"] = {
-					checkOnSave = {
-						command = "clippy",
-					},
-					cargo = {
-						allFeatures = true,
-					},
-					procMacro = {
-						enable = true,
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						runtime = { version = "LuaJIT" },
+						diagnostics = { globals = { "vim" } },
+						completion = { callSnippet = "Replace" },
+						workspace = {
+							checkThirdParty = false,
+							library = { vim.env.VIMRUNTIME },
+						},
+						telemetry = { enable = false },
 					},
 				},
-			},
-		})
+			})
 
-		vim.lsp.config("ts_ls", {
-			capabilities = capabilities,
-			settings = {
-				typescript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
+			vim.lsp.config("ts_ls", {
+				settings = {
+					typescript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+					javascript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
 					},
 				},
-				javascript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-			},
-		})
+			})
 
-		vim.lsp.config("nil_ls", {
-			capabilities = capabilities,
-		})
-		local servers = { "emmet_ls", "markdown_oxide", "lua_ls", "pyright", "eslint", "rust_analyzer", "ts_ls",
-			"nil_ls" }
-		vim.lsp.enable(servers)
-	end,
+			vim.lsp.config("markdown_oxide", {
+				filetypes = { "markdown", "markdown_inline" },
+			})
+
+			vim.lsp.config("nil_ls", {})
+
+			vim.lsp.enable({
+				"markdown_oxide",
+				"lua_ls",
+				"pyright",
+				"eslint",
+				"rust_analyzer",
+				"ts_ls",
+				"nil_ls",
+			})
+		end,
+	},
 }
