@@ -7,7 +7,7 @@ return {
 			require("flash").setup({
 				search = { case_sensitive = false, smart_case = false, incremental = false },
 			})
-			vim.keymap.set({ "n", "x", "o" }, "s", function()
+			vim.keymap.set({ "n", "x", "o" }, "zz", function()
 				require("flash").jump()
 			end, { desc = "Flash search" })
 		end,
@@ -33,7 +33,8 @@ return {
 				REFACTOR = { icon = "󰑓", color = "hint" },
 			},
 			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { desc = "TODO comments" }),
-			vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble win.position=left<CR>", { desc = "TODO comments" }),
+			vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble win.position=left<CR>",
+				{ desc = "TODO comments" }),
 		},
 	},
 	{
@@ -103,25 +104,5 @@ return {
 		"echasnovski/mini.surround",
 		lazy = true,
 		event = "VeryLazy",
-		opts = {
-			custom_surroundings = nil,
-			highlight_duration = 500,
-			mappings = {
-				add = "<leader>aa",
-				delete = "<leader>ad",
-				find = "<leader>af",
-				find_left = "<leader>aF",
-				highlight = "<leader>ah",
-				replace = "<leader>ar",
-				update_n_lines = "<leader>an",
-
-				suffix_last = "l",
-				suffix_next = "n",
-			},
-			n_lines = 20,
-			respect_selection_type = false,
-			search_method = "cover",
-			silent = false,
-		},
 	},
 }

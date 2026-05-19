@@ -50,13 +50,13 @@ return {
 	},
 
 	{
-		"rcarriga/nvim-notify",
+		"nvim-mini/mini.notify",
 		lazy = true,
 		event = "VeryLazy",
 		config = function()
-			local notify = require("notify")
-			notify.setup({ background_colour = "#000001", timeout = 200 })
-			vim.notify = notify
+			require("notify").setup({
+				background_colour = "#000000",
+			})
 		end,
 	},
 	{
