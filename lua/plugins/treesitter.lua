@@ -5,51 +5,45 @@ return {
 		version = false,
 		build = ":TSUpdate",
 		config = function()
-			local nvim_ts = require("nvim-treesitter")
+			local treesitter = require("nvim-treesitter")
 
-			vim.api.nvim_create_autocmd("FileType", {
-				callback = function(args)
-					local buf = args.buf
-					pcall(vim.treesitter.start, buf)
-					vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-				end,
-			})
-
-			nvim_ts.setup({
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<C-space>",
-						node_incremental = "<C-space>",
-						scope_incremental = false,
-						node_decremental = "<bs>",
-					},
-				},
-			})
-
-			local ensureInstalled = {
-				"json", "javascript", "typescript", "tsx",
-				"yaml", "html", "css", "markdown",
-				"markdown_inline", "bash", "lua", "vim",
-				"gitignore", "vimdoc", "c", "typst",
-				"regex", "fish", "go", "rust",
-				"python", "toml", "diff", "gitcommit", "query",
+			local ensure_installed = {
+				"javascript",
+				"typescript",
+				"markdown",
+				"markdown_inline",
+				"bash",
+				"lua",
+				"vim",
+				"vimdoc",
+				"typst",
+				"regex",
+				"fish",
+				"diff",
 				"nix",
 			}
 
-			local ok, ts_config = pcall(require, "nvim-treesitter.config")
-			if ok then
-				local alreadyInstalled = ts_config.get_installed()
-				local parsersToInstall = vim.iter(ensureInstalled)
-				    :filter(function(parser)
-					    return not vim.tbl_contains(alreadyInstalled, parser)
-				    end)
-				    :totable()
+			treesitter.install(ensure_installed)
 
-				if #parsersToInstall > 0 then
-					nvim_ts.install(parsersToInstall)
-				end
-			end
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "*",
+				callback = function(args)
+					local buf = args.buf
+					local ft = vim.bo[buf].filetype
+
+					local lang = vim.treesitter.language.get_lang(ft)
+					if not lang then
+						return
+					end
+
+					local ok_add = pcall(vim.treesitter.language.add, lang)
+					if not ok_add then
+						return
+					end
+
+					pcall(vim.treesitter.start, buf, lang)
+				end,
+			})
 		end,
 	},
 }
