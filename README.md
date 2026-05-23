@@ -1,66 +1,47 @@
-# 🚀 Neovim Config
+# Neovim Config
 
-My personal **Neovim configuration**, focused on normal development, performance optimization, and a modern terminal experience.  
-Built with **Lua**, including **LSP** support, autocompletion, snippets, and more.
+Personal **Neovim** configuration shaped and refined over time, now primarily focused on managing my _.dotfiles_ and my _NixOS_ environment. The workflow is especially optimized for _Markdown_ and _Typst_ editing, aiming for a minimal, fast, and comfortable experience for writing, configuration, and daily development.
 
----
-
-## 📂 Repository Structure
+## Structure
 
 ```
 nvim/
 ├── init.lua
 ├── lua/
-│ ├── core/ -> Neovim options and keymaps
-│ ├── snippets/ -> Personal snippets
-│ └── plugins/ -> Plugins configurations
+│   ├── core/       -> Options, keymaps, plugin manager, notes
+│   └── plugins/    -> Plugin configurations
 ```
 
----
+## Features
 
-## ✨ Features
+- Fully configured in Lua
+- Plugin management with lazy.nvim
+- LSP support via nvim-lspconfig and mason.nvim
+- Autocompletion with nvim-cmp and LuaSnip snippets
+- Treesitter for syntax highlighting
+- Telescope for fuzzy finding and search
+- Git integration with gitsigns and lazygit
+- Code formatting with conform.nvim
+- UI enhancements: noice.nvim, lualine, bufferline, which-key
+- Markdown rendering and preview
+- Obsidian note-taking integration with backlinks and tags
+- Option for transparent backgrounds
+- Multiple colorschemes available
 
-- ⚡ Fully configured in **Lua** for speed and flexibility.
-- 🧩 Plugin management with **lazy.nvim**.
-- 💡 **LSP** support with `nvim-lspconfig` and `mason`.
-- 🔮 Autocompletion using `nvim-cmp` + snippets (`LuaSnip`).
-- 🌲 **Treesitter** for modern syntax highlighting.
-- 📊 UI improvements with `noice`, `lualine`, `bufferline`, and more.
-- 🔍 Powerful search and navigation with `telescope` and `spectre`.
-- 🌐 Git integration with `gitsigns` and related tools.
-- 🧠 **Obsidian.nvim** integration for connected note-taking and Zettelkasten workflows.
-- 🎨 Default theme: **Night Owl**.
+## Requirements
 
----
-
-## 🛠️ Requirements
-
-- Neovim `>= 0.11`
+- Neovim >= 0.12
 - Git
-- Lazygit (recommended for Git workflows)
-- Node.js (required by some LSP servers)
-- A C/C++ compiler (for Treesitter parsers and certain plugins)
+- Lazygit (recommended)
+- Node.js (for some LSP servers)
+- Treesitter
+- C/C++ compiler (for Treesitter parsers)
 
----
-
-## ⚙️ Installation
-
-1. Clone this repository into your Neovim config path:
+## Installation
 
 ```bash
-git clone https://github.com/Geudys/nvim.git
-```
-
-2. Open Neovim and let it install plugins automatically:
-
-```bash
+git clone https://github.com/Geudys/nvim.git ~/.config/nvim
 nvim
 ```
 
-## 📝 Notes
-
-his configuration is a work in progress.
-
-Designed for general development (backend, frontend, scripting, etc.).
-
-Inspired by minimal but powerful Neovim setups.
+Plugins will install automatically on first launch.
