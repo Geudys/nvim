@@ -45,7 +45,7 @@ return {
 					"FloatBorder",
 				},
 			})
-			vim.cmd("TransparentEnable")
+			vim.cmd("TransparentDisable")
 		end,
 	},
 
