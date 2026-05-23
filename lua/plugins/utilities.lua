@@ -50,13 +50,29 @@ return {
 	},
 
 	{
-		"nvim-mini/mini.notify",
-		lazy = true,
+		"echasnovski/mini.notify",
+		version = false,
 		event = "VeryLazy",
+
 		config = function()
-			require("notify").setup({
-				background_colour = "#000000",
+			require("mini.notify").setup({
+				lsp_progress = {
+					enable = true,
+					level = "INFO",
+					duration_last = 1000,
+				},
+				window = {
+					config = function()
+						return {
+							anchor = "NE",
+							col = vim.o.columns,
+							row = 0,
+						}
+					end,
+				},
 			})
+
+			vim.notify = require("mini.notify").make_notify()
 		end,
 	},
 	{
