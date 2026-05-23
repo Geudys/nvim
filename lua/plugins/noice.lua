@@ -53,6 +53,7 @@ return {
 					},
 				},
 				lsp = {
+					progress = { enabled = false },
 					override = {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 						["vim.lsp.util.stylize_markdown"] = true,
@@ -61,7 +62,7 @@ return {
 					hover = { enabled = true, silent = true },
 					signature = { enabled = true },
 				},
-				notify = { enabled = true, view = "notify" },
+				notify = { enabled = false, view = "notify" },
 				routes = {
 					{ filter = { event = "msg_show", min_height = 10 }, view = "split" },
 				},
