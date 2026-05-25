@@ -2,7 +2,7 @@ local M = {}
 
 -- Config
 M.config = {
-	vault = "/home/geudys/Desktop/Obsidian/",
+	vault = "/home/geudys/Documents/Obsidian/",
 	templates_dir = "99 - Templates/",
 }
 
