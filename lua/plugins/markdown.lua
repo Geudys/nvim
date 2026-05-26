@@ -6,22 +6,23 @@ return {
 		opts = {
 			render_modes = { "n", "v", "i", "c" },
 			checkbox = {
-				unchecked = { icon = " " },
-				checked = { icon = " " },
+				unchecked = { icon = " " },
+				checked = { icon = " " },
+
 				custom = {
 					info = {
 						raw = "[>]",
-						rendered = " ",
+						rendered = " ",
 						highlight = "RenderMarkdownInfo",
 					},
 					warn = {
 						raw = "[!]",
-						rendered = " ",
+						rendered = " ",
 						highlight = "RenderMarkdownWarn",
 					},
 					error = {
 						raw = "[~]",
-						rendered = " ",
+						rendered = " ",
 						highlight = "RenderMarkdownError",
 					},
 				},
