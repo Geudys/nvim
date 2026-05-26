@@ -35,6 +35,8 @@ return {
 					"RenderMarkdownH5Bg",
 					"RenderMarkdownH6Bg",
 				},
+				left_pad = 1,
+				position = "inline",
 			},
 			html = { enabled = true },
 			latex = { enabled = true },
@@ -43,19 +45,19 @@ return {
 		config = function(_, opts)
 			require("render-markdown").setup(opts)
 
-			vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { bg = "#c1c1c1", fg = "#000000" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { bg = "#aaaaaa", fg = "#000000" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { bg = "#999999", fg = "#000000" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { bg = "#888888", fg = "#000000" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { bg = "#7799bb", fg = "#000000" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { bg = "#6987a5", fg = "#000000" })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { bg = "#c1c1c1", fg = "#000000", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { bg = "#aaaaaa", fg = "#000000", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { bg = "#999999", fg = "#000000", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { bg = "#888888", fg = "#000000", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { bg = "#7799bb", fg = "#000000", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { bg = "#556677", fg = "#c1c1c1", bold = true })
 
-			vim.api.nvim_set_hl(0, "RenderMarkdownH1", { fg = "#000000", bg = "#c1c1c1" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH2", { fg = "#000000", bg = "#aaaaaa" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH3", { fg = "#000000", bg = "#999999" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH4", { fg = "#000000", bg = "#888888" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH5", { fg = "#000000", bg = "#7799bb" })
-			vim.api.nvim_set_hl(0, "RenderMarkdownH6", { fg = "#000000", bg = "#6987a5" })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH1", { fg = "#000000", bg = "#c1c1c1", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH2", { fg = "#000000", bg = "#aaaaaa", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH3", { fg = "#000000", bg = "#999999", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH4", { fg = "#000000", bg = "#888888", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH5", { fg = "#000000", bg = "#7799bb", bold = true })
+			vim.api.nvim_set_hl(0, "RenderMarkdownH6", { fg = "#c1c1c1", bg = "#556677", bold = true })
 		end,
 	},
 	{
