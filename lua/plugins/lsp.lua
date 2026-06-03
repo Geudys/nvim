@@ -95,7 +95,7 @@ return {
 			settings = {
 				Lua = {
 					runtime = { version = "LuaJIT" },
-					diagnostics = { globals = { "vim" } },
+					diagnostics = { globals = { "vim", "hl" } },
 					completion = { callSnippet = "Replace" },
 					workspace = {
 						checkThirdParty = false,
